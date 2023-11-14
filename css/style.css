@@ -73,24 +73,7 @@ li {
   list-style: none;
 }
 
-#show-password {
-  background-color: blueviolet;
-  height: 1.5rem;
-  width: 3rem;
-  border-radius: 5px;
-  color: white;
-
-}
-
-#show-confirmPassword {
-  background-color: blueviolet;
-  color: white;
-  height: 1.5rem;
-  width: 3rem;
-  border-radius: 5px;
-}
-
-@media (max-width: 450px) {
+@media (max-width: 950px) {
     body > div > div > div.col-sm-8.col-lg-6 {
 visibility: hidden;
   }
