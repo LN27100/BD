@@ -77,3 +77,11 @@ confirmPassword.addEventListener('focus', function () {
 })
 
 let btnSubmit = document.getElementById('envoyer')
+
+
+
+
+
+
+// boutons radios filtre recherche
+
