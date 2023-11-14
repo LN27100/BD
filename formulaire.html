@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Les BD</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+        
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Inscription</a>
+                <a class="dropdown-item" href="#">Connexion</a>
+
+              </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                  aria-controls="offcanvasExample">
+                  Panier
+                </a>
+              </li>
+           
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    
+
+
+    <div class="wrapper">
+        <div action="profilOk">
+        <div class="categories d-flex row justify-content-center">
+            <div class="card">
+                <p class="card-text">PROFIL</p>
+                
+            
+                  
+                  <img id="imagePreview" src="" alt="Aperçu de l'image" style="display: none; max-width: 100px;">
+                  
+
+                  <label for="genre">Genre :</label>
+                  <select id="genre" aria-label="Default select example" name="genre">
+                      <option selected>faites votre choix</option>
+                      <option value="féminin">Féminin</option>
+                      <option value="masculin">Masculin</option>
+                      <option value="Ne souhaite pas répondre">Ne souhaite pas répondre</option>
+                  </select>
+
+                  <div><label for="lastName">Nom:</label>
+                    <input id="lastName" type="text" name="lastName">
+                </div>
+    
+                <div><label for="firstName">Prénom :</label>
+                    <input id="firstName" type="text" name="firstName">
+                </div>
+    
+                <div><label for="numberPhone">Numéro de contact :</label>
+                    <input id="numberPhone" type="number" name="numberPhone">
+                </div>
+    
+                <div><label for="mail">Adresse mail :</label>
+                    <input id="mail" type="text" name="mail">
+                </div>
+
+                <div class="container">
+                    <h1>Définir un mot de passe </h1>            
+                    <div>
+                        <label for="password">Mot de passe</label>
+                        <input id="password" type="password">
+                        <button id="show-password"><i class="bi bi-eye-slash-fill"></i></button>
+                    </div>
+            
+                    <div>
+                        <label for="confirm-password">Confirmer le mot de passe</label>
+                        <input id="confirm-password" type="password">
+                        <button id="show-confirmPassword"><i class="bi bi-eye-slash-fill"></i>
+                        </button>
+                    </div>
+                    <br>
+                    <p id="informations"></p>
+                    <button id="change-password">Envoyer</button>
+
+                </div>
+                <input type="submit" valeur="envoyer" name="envoyer" id="envoyer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
