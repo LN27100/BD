@@ -53,6 +53,18 @@ input:focus:invalid {
 }
 
 /* mon code */
+
+body {
+  background-image: url(/images/backgroundAccueil.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+h1 {
+  color: white;
+}
+
 ul {
   list-style: none;
 }
@@ -77,3 +89,10 @@ li {
   width: 3rem;
   border-radius: 5px;
 }
+
+@media (max-width: 450px) {
+    body > div > div > div.col-sm-8.col-lg-6 {
+visibility: hidden;
+  }
+}
+
