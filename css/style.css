@@ -14,11 +14,6 @@ p>label {
   display: block;
 }
 
-legend {
-  background-color: #000;
-  color: #fff;
-  padding: 3px 6px;
-}
 
 input[type=text],
 input[type=email],
@@ -52,13 +47,55 @@ input:focus:invalid {
   color: red;
 }
 
-/* mon code */
+
+/* MON CODE */
 
 body {
   background-image: url(/images/backgroundAccueil.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 
+}
+
+body > nav {
+  height: 14rem;
+}
+.navbar {
+  padding-left: 2rem;
+  color: white;
+  background: radial-gradient(circle, rgba(110,108,108,1) 34%, rgba(128,124,124,1) 70%, rgba(161,160,160,1) 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.navbar-brand {
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+#navbarSupportedContent > ul > li.nav-item.dropdown > a {
+  color: white;
+  font-size: 1.5rem;
+
+}
+
+#navbarSupportedContent > ul > li:nth-child(2) > a {
+  color: white;
+  font-size: 1.5rem;
+
+}
+
+#sidenav-3 {
+  margin: 1rem;
+}
+.btn {
+  color: white;
+  background: linear-gradient(0deg, rgba(110,109,107,0.7287289915966386) 20%, rgba(69,69,69,0.6530987394957983) 45%);
+}
+
+.btn:hover {
+  background: linear-gradient(0deg, rgba(133,125,125,1) 10%, rgba(189,189,189,1) 55%);
 }
 
 h1 {

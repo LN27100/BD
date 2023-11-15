@@ -16,8 +16,8 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Accueil</a>
+  <nav class="navbar navbar-expand-lg navbar-light ">
+    <a class="navbar-brand" href="BD.html">Accueil</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -28,15 +28,13 @@
 
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Profil
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="./formulaire.html" target="_blank">Inscription</a>
-            <a class="dropdown-item" href="#">Connexion</a>
-
-          </div>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="formulaire.html">Inscription</a></li>
+            <li><a class="dropdown-item" href="#">Connexion</a></li>
+          </ul>
         </li>
 
         <!-- Panier d'achat -->
@@ -48,6 +46,7 @@
         </li>
 
       </ul>
+    </div>
 
       <!-- Barre de recherche -->
       <div id="sidenav-3" data-mdb-close-on-esc="false" class="sidenav" data-mdb-hidden="false"
@@ -58,6 +57,7 @@
         </div>
 
         <ul id="scroll-container" class="sidenav-menu">
+          <br>
           <div class="form-check form-switch">
             <input class="form-check-input" type="radio" id="ChoixOne" name="choix" value="auteur">
             <label class="form-check-label" for="ChoixOne">Par auteur</label>
@@ -72,17 +72,15 @@
           </div>
 
           <div class="input-group rounded my-2">
-            <div class="form-outline w-auto">
+            <div >
               <input id="search-input" type="search" id="form1" class="form-control" />
-              <button class="btn btn-outline-success my-2 my-sm-0" id="searchButton" type="submit">Rechercher</button>
+              <br>
+              <button class="btn my-2 my-sm-0" id="searchButton" type="submit">Rechercher</button>
             </div>
           </div>
         </ul>
 
-        <div class="text-center" style="min-height: 3rem;">
-          <hr class="mt-0 mb-2" />
-        </div>
-      </div>
+
 
     </div>
   </nav>
@@ -171,8 +169,10 @@
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
     integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
     crossorigin="anonymous"></script>
