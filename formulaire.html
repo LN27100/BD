@@ -2,20 +2,24 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/formulaire.css">
-    <title>Formulaire d'inscription</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+  <link rel="stylesheet" href="css/formulaire.css">
+  <title>Formulaire d'inscription</title>
 </head>
 
 <body>
-     <!-- Navbar -->
+
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light ">
-    <a class="navbar-brand" href="BD.html">Accueil</a>
+    <a class="navbar-brand" href="BD.html"><img class= "logo" src="images/meilleur.png" alt="logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -26,7 +30,7 @@
 
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Profil
           </a>
           <ul class="dropdown-menu">
@@ -35,6 +39,7 @@
           </ul>
         </li>
 
+        
         <!-- Panier d'achat -->
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
@@ -46,39 +51,40 @@
       </ul>
     </div>
 
-      <!-- Barre de recherche -->
-      <div id="sidenav-3" data-mdb-close-on-esc="false" class="sidenav" data-mdb-hidden="false"
-        data-mdb-position="absolute" data-mdb-focus-trap="false" data-mdb-scroll-container="#scroll-container"
-        role="navigation">
-        <div class="text-center">
-          <hr class="m-0" />
+
+    <!-- Barre de recherche -->
+    <div id="sidenav-3" data-mdb-close-on-esc="false" class="sidenav" data-mdb-hidden="false"
+      data-mdb-position="absolute" data-mdb-focus-trap="false" data-mdb-scroll-container="#scroll-container"
+      role="navigation">
+      <div class="text-center">
+        <hr class="m-0" />
+      </div>
+
+      <ul id="scroll-container" class="sidenav-menu">
+        <br>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="radio" id="ChoixOne" name="choix" value="auteur">
+          <label class="form-check-label" for="ChoixOne">Par auteur</label>
+        </div>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="radio" id="ChoixTwo" name="choix" value="album">
+          <label class="form-check-label" for="ChoixTwo">Par album</label>
+        </div>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="radio" id="ChoixThree" name="choix" value="serie">
+          <label class="form-check-label" for="ChoixThree">Par série</label>
         </div>
 
-        <ul id="scroll-container" class="sidenav-menu">
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="radio" id="ChoixOne" name="choix" value="auteur">
-            <label class="form-check-label" for="ChoixOne">Par auteur</label>
+        <div class="input-group rounded my-2">
+          <div>
+            <input id="search-input" type="search" id="form1" class="form-control" />
+            <br>
+            <button class="btn my-2 my-sm-0" id="searchButton" type="submit">Rechercher</button>
           </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="radio" id="ChoixTwo" name="choix" value="album">
-            <label class="form-check-label" for="ChoixTwo">Par album</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="radio" id="ChoixThree" name="choix" value="serie">
-            <label class="form-check-label" for="ChoixThree">Par série</label>
-          </div>
-
-          <div class="input-group rounded my-2">
-            <div class="form-outline w-auto">
-              <input id="search-input" type="search" id="form1" class="form-control" />
-              <button class="btn btn-outline-success my-2 my-sm-0" id="searchButton" type="submit">Rechercher</button>
-            </div>
-          </div>
-        </ul>
-
-        <div class="text-center" style="min-height: 3rem;">
-          <hr class="mt-0 mb-2" />
         </div>
+      </ul>
+
+
 
     </div>
   </nav>
@@ -104,14 +110,13 @@
         <p>Total : </p>
         <a href="confirmCommande.html" target="_blank"><button class="btn2">commander</button></a>
       </div>
-      
+
     </div>
   </div>
   <div class="container">
 
     <!-- Résultats de la recherche -->
-    <div id="results"></div>
-    <br>
+    <div id="results" class="row"></div>    <br>
     <br>
 
 
