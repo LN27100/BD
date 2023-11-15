@@ -123,6 +123,11 @@ h2 {
   visibility: hidden;
 }
 
+.card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+}
 
 @media (max-width: 950px) {
     body > div > div > div.col-sm-8.col-lg-6 {
