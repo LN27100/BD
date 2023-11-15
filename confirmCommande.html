@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
   <link rel="stylesheet" href="css/style.css">
-  <title>Les BD</title>
+  <title>Confirmation de commande</title>
 </head>
 
 <body>
@@ -111,6 +111,7 @@
       
     </div>
   </div>
+
   <div class="container">
 
     <!-- Résultats de la recherche -->
@@ -118,57 +119,25 @@
     <br>
     <br>
 
-    <h1>Liste des BD</h1>
-
-    <div class="row">
-      <div class="col-sm-4 col-lg-6">
-        <p id="messageId">
-          <label for="id">Id de l'album :</label>
-          <input type="number" required id="id" value="0" min="0" title="Saisissez un numéro et validez">
-        </p>
-
-        <!-- Albums en cards version mobile -->
-        <div class="card" is="toto" style="width: 18rem;">
-          <img class="card-img-top" src="images/noComicsMini.jpeg" id="albumMini" alt="Card image cap">
+    <div class="titre text-center mt-5 text-white">
+        <h1>Mon panier</h1>
+      </div>
+    
+      <div class="listcard1 text-center d-flex row justify-content-center mt-4">
+        <div class="card border-4 p-2 mb-5 mx-4">
+    
           <div class="card-body">
-            <p>
-              <label for="serie">Série :</label>
-              <input type="text" id="serie" readonly>
-
-              <label for="numero">Album N° :</label>
-              <input type="text" id="numero" readonly>
-
-              <label for="titre">Titre :</label>
-              <input type="text" id="titre" readonly>
-
-              <label for="auteur">Auteur :</label>
-              <input type="text" id="auteur" readonly>
-            </p>
-            <p>
-              <label for="prix">Prix :</label>
-              <input type="number" id="prix" readonly>
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <h5 class="card-title text-white">Articles</h5>
+            <p class="card-text text-white">Quantité</p>
+            <p>Total</p>
+        <p></p>
           </div>
         </div>
+    
+        
       </div>
-
-
-
-      <div class="col-sm-8 col-lg-6">
-
-        <img src="images/noComics.jpeg" id="album">
-
-      </div>
-
-    </div>
-
   </div>
-
-
-  
-
-
+          
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"

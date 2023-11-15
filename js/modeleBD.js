@@ -162,12 +162,15 @@ jQuery(document).ready(function ($) {
 //filtre pour barre de recherche.
 
 document.getElementById('searchButton').addEventListener('click', function() {
+
 	const radioByAlbum = document.getElementById('ChoixTwo');
 	const radioByAuteur = document.getElementById('ChoixOne');
 	const radioBySerie = document.getElementById('ChoixThree');
 	const searchInput = document.getElementById('search-input').value.toLowerCase();
 	const resultsContainer = document.getElementById('results');
-	resultsContainer.innerHTML = '';
+
+	resultsContainer.innerHTML = `Résultats de la recherche :  `;
+
   
 	if (radioByAlbum.checked) {
 	  console.log("Recherche par album");
@@ -178,6 +181,7 @@ document.getElementById('searchButton').addEventListener('click', function() {
 		  resultsContainer.appendChild(result);
 		}
 	  });
+
 	} else if (radioByAuteur.checked) {
 	  console.log("Recherche par auteur");
 	  auteurs.forEach(auteur => {
@@ -189,6 +193,7 @@ document.getElementById('searchButton').addEventListener('click', function() {
 		  }
 		});
 	  });
+
 	} else if (radioBySerie.checked) {
 	  console.log("Recherche par série");
 	  series.forEach(serie => {
@@ -199,7 +204,9 @@ document.getElementById('searchButton').addEventListener('click', function() {
 			resultsContainer.appendChild(result);
 		  }
 		});
+
 	  });
+
 	} else {
 	  console.log("Veuillez sélectionner un critère de recherche.");
 	}

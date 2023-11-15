@@ -73,6 +73,20 @@ li {
   list-style: none;
 }
 
+#results {
+color: white;
+}
+
+#messageId > label {
+  color: white;
+}
+
+h2 {
+  color:white;
+  visibility: hidden;
+}
+
+
 @media (max-width: 950px) {
     body > div > div > div.col-sm-8.col-lg-6 {
 visibility: hidden;
