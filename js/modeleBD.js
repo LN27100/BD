@@ -5,38 +5,6 @@ jQuery(document).ready(function ($) {
 	const srcAlbumMini = "albumsMini/"; // emplacement des images des albums en petit
 	const srcAlbum = "albums/"; // emplacement des images des albums en grand
 
-	
-
-
-	// console.log("Liste des albums");
-	// albums.forEach(album => {
-	// 	serie = series.get(album.idSerie);
-	// 	auteur = auteurs.get(album.idAuteur);
-	// 	console.log(album.titre+" N°"+album.numero+" Série:"+serie.nom+" Auteur:"+auteur.nom);
-	// });
-
-
-	// console.log("Liste des albums par série");
-	// for(let [idSerie, serie] of series.entries()) {
-	// 	// Recherche des albums de la série
-	// 	for (let [idAlbum, album] of albums.entries()) {
-	// 		if (album.idSerie == idSerie) {
-	// 			console.log(serie.nom+", Album N°"+album.numero+" "+album.titre+", Auteur:"+auteurs.get(album.idAuteur).nom);
-	// 		}
-	// 	}
-	// }
-
-
-	// console.log("Liste des albums par auteur");
-	// for(let [idAuteur, auteur] of auteurs.entries()) {
-	// 	// Recherche des albums de l'auteur
-	// 	for (let [idAlbum, album] of albums.entries()) {
-	// 		if (album.idAuteur == idAuteur) {
-	// 			console.log(auteur.nom+", Album N°"+album.numero+" "+album.titre+", Série:"+series.get(album.idSerie).nom);
-	// 		}
-	// 	}  
-	// }
-
 
 
 	// AFFIHAGE DES BD
@@ -202,14 +170,16 @@ function searchByAuteur(searchInput) {
 
 // Fonction pour la recherche par série
 function searchBySerie(searchInput) {
-	series.forEach(serie => {
-		albums.forEach(album => {
-			if (album.idSerie === serie.id && serie.nom.toLowerCase().includes(searchInput)) {
-				displayResult(album);
-			}
-		});
-	});
-}
+for(let [idSerie, serie] of series.entries()) {
+	for (let [idAlbum, album] of albums.entries()) {
+		if (album.idSerie == idSerie) {
+			console.log(serie.nom+", Album N°"+album.numero+" "+album.titre+", Auteur:"+auteurs.get(album.idAuteur).nom);
+			displayResult(album);
+		}
+	}
+}}
+
+
 
 // AFFICHER LE RESULTAT DE LA RECHERCHE DANS UNE CARD
 function displayResult(album) {
