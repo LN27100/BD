@@ -8,55 +8,55 @@ jQuery(document).ready(function ($) {
 	/*
 	// Lecture d'un album
 	console.log("Lecture d'un album");
-	var album = albums.get("5");
-	var serie = series.get(album.idSerie);
-	var auteur = auteurs.get(album.idAuteur);
+	let album = albums.get("5");
+	let serie = series.get(album.idSerie);
+	let auteur = auteurs.get(album.idAuteur);
 	console.log(album.titre+" "+serie.nom+" "+auteur.nom);
 	*/
 
 	/*
 	console.log("Liste des albums");
 	albums.forEach(album => {
-	    serie = series.get(album.idSerie);
-	    auteur = auteurs.get(album.idAuteur);
-	    console.log(album.titre+" N°"+album.numero+" Série:"+serie.nom+" Auteur:"+auteur.nom);
+		serie = series.get(album.idSerie);
+		auteur = auteurs.get(album.idAuteur);
+		console.log(album.titre+" N°"+album.numero+" Série:"+serie.nom+" Auteur:"+auteur.nom);
 	});
 	*/
 
 	/*
 	console.log("Liste des albums par série");
-	for(var [idSerie, serie] of series.entries()) {
-	    // Recherche des albums de la série
-	    for (var [idAlbum, album] of albums.entries()) {
-	        if (album.idSerie == idSerie) {
-	            console.log(serie.nom+", Album N°"+album.numero+" "+album.titre+", Auteur:"+auteurs.get(album.idAuteur).nom);
-	        }
-	    }
+	for(let [idSerie, serie] of series.entries()) {
+		// Recherche des albums de la série
+		for (let [idAlbum, album] of albums.entries()) {
+			if (album.idSerie == idSerie) {
+				console.log(serie.nom+", Album N°"+album.numero+" "+album.titre+", Auteur:"+auteurs.get(album.idAuteur).nom);
+			}
+		}
 	    
 	}
 	*/
 
 	/*
 	console.log("Liste des albums par auteur");
-	for(var [idAuteur, auteur] of auteurs.entries()) {
-	    // Recherche des albums de l'auteur
-	    for (var [idAlbum, album] of albums.entries()) {
-	        if (album.idAuteur == idAuteur) {
-	            console.log(auteur.nom+", Album N°"+album.numero+" "+album.titre+", Série:"+series.get(album.idSerie).nom);
-	        }
-	    }
+	for(let [idAuteur, auteur] of auteurs.entries()) {
+		// Recherche des albums de l'auteur
+		for (let [idAlbum, album] of albums.entries()) {
+			if (album.idAuteur == idAuteur) {
+				console.log(auteur.nom+", Album N°"+album.numero+" "+album.titre+", Série:"+series.get(album.idSerie).nom);
+			}
+		}
 	    
 	}
 	*/
 
 	// Affichage des BD
-	var txtSerie = document.getElementById("serie");
-	var txtNumero = document.getElementById("numero");
-	var txtTitre = document.getElementById("titre");
-	var txtAuteur = document.getElementById("auteur");
-	var txtPrix = document.getElementById("prix");
-	var imgAlbum = document.getElementById("album");
-	var imgAlbumMini = document.getElementById("albumMini");
+	let txtSerie = document.getElementById("serie");
+	let txtNumero = document.getElementById("numero");
+	let txtTitre = document.getElementById("titre");
+	let txtAuteur = document.getElementById("auteur");
+	let txtPrix = document.getElementById("prix");
+	let imgAlbum = document.getElementById("album");
+	let imgAlbumMini = document.getElementById("albumMini");
 
 	imgAlbum.addEventListener("error", function () {
 		prbImg(this)
@@ -66,7 +66,7 @@ jQuery(document).ready(function ($) {
 		prbImg(this)
 	});
 
-	var id = document.getElementById("id");
+	let id = document.getElementById("id");
 	id.addEventListener("change", function () {
 		getAlbum(this)
 	});
@@ -80,7 +80,7 @@ jQuery(document).ready(function ($) {
 	 */
 	function getAlbum(num) {
 
-		var album = albums.get(num.value);
+		let album = albums.get(num.value);
 
 		if (album === undefined) {
 			txtSerie.value = "";
@@ -93,8 +93,8 @@ jQuery(document).ready(function ($) {
 
 		} else {
 
-			var serie = series.get(album.idSerie);
-			var auteur = auteurs.get(album.idAuteur);
+			let serie = series.get(album.idSerie);
+			let auteur = auteurs.get(album.idAuteur);
 
 			txtSerie.value = serie.nom;
 			txtNumero.value = album.numero;
@@ -102,7 +102,7 @@ jQuery(document).ready(function ($) {
 			txtAuteur.value = auteur.nom;
 			txtPrix.value = album.prix;
 
-			var nomFic = serie.nom + "-" + album.numero + "-" + album.titre;
+			let nomFic = serie.nom + "-" + album.numero + "-" + album.titre;
 
 			// Utilisation d'une expression régulière pour supprimer 
 			// les caractères non autorisés dans les noms de fichiers : '!?.":$
@@ -159,67 +159,107 @@ jQuery(document).ready(function ($) {
 });
 
 
-//filtre pour barre de recherche.
 
-document.getElementById('searchButton').addEventListener('click', function() {
+//BARRE DE RECHERCHE AVEC FILTRES
 
+// Écouteur d'événement pour le bouton de recherche
+document.getElementById('searchButton').addEventListener('click', function () {
+	// Récupère les éléments du formulaire et de la zone de résultats
 	const radioByAlbum = document.getElementById('ChoixTwo');
 	const radioByAuteur = document.getElementById('ChoixOne');
 	const radioBySerie = document.getElementById('ChoixThree');
 	const searchInput = document.getElementById('search-input').value.toLowerCase();
 	const resultsContainer = document.getElementById('results');
 
-	resultsContainer.innerHTML = `Résultats de la recherche :  `;
+	// Efface les résultats précédents
+	resultsContainer.innerHTML = '';
 
-  
+	// Logique de recherche en fonction du critère sélectionné
 	if (radioByAlbum.checked) {
-	  console.log("Recherche par album");
-	  albums.forEach(album => {
-		if (album.titre.toLowerCase().includes(searchInput)) {
-		  const result = document.createElement('p');
-		  result.textContent = album.titre + " N°" + album.numero + " Série:" + series.get(album.idSerie).nom + " Auteur:" + auteurs.get(album.idAuteur).nom;
-		  resultsContainer.appendChild(result);
-		}
-	  });
-
+		console.log("Recherche par album");
+		// Parcours les albums et affiche les résultats correspondants
+		albums.forEach(album => {
+			if (album.titre.toLowerCase().includes(searchInput)) {
+				displayResult(album);
+			}
+		});
 	} else if (radioByAuteur.checked) {
-	  console.log("Recherche par auteur");
-	  auteurs.forEach(auteur => {
-		albums.forEach(album => {
-		  if (album.idAuteur === auteur.id && auteur.nom.toLowerCase().includes(searchInput)) {
-			const result = document.createElement('p');
-			result.textContent = auteur.nom + ", Album N°" + album.numero + " " + album.titre + ", Série:" + series.get(album.idSerie).nom;
-			resultsContainer.appendChild(result);
-		  }
+		console.log("Recherche par auteur");
+		// Parcours les auteurs et les albums, affiche les résultats correspondants
+		auteurs.forEach(auteur => {
+			albums.forEach(album => {
+				if (album.idAuteur === auteur.id && auteur.nom.toLowerCase().includes(searchInput)) {
+					displayResult(album);
+				}
+			});
 		});
-	  });
-
 	} else if (radioBySerie.checked) {
-	  console.log("Recherche par série");
-	  series.forEach(serie => {
-		albums.forEach(album => {
-		  if (album.idSerie === serie.id && serie.nom.toLowerCase().includes(searchInput)) {
-			const result = document.createElement('p');
-			result.textContent = serie.nom + ", Album N°" + album.numero + " " + album.titre + ", Auteur:" + auteurs.get(album.idAuteur).nom;
-			resultsContainer.appendChild(result);
-		  }
+		console.log("Recherche par série");
+		// Parcours les séries et les albums, affiche les résultats correspondants
+		series.forEach(serie => {
+			albums.forEach(album => {
+				if (album.idSerie === serie.id && serie.nom.toLowerCase().includes(searchInput)) {
+					displayResult(album);
+				}
+			});
 		});
-
-	  });
-
 	} else {
-	  console.log("Veuillez sélectionner un critère de recherche.");
+		console.log("Veuillez sélectionner un critère de recherche.");
 	}
-  });
+});
+
+// Fonction pour afficher un résultat dans une card
+function displayResult(album) {
+    // Crée une card pour chaque résultat
+    const card = document.createElement('div');
+    card.classList.add('col-sm-6', 'col-md-4', 'col-lg-3', 'mb-4');
+
+    // Utilise l'id de la série pour obtenir le nom de la série
+    let nomFic = series.get(album.idSerie).nom + "-" + album.numero + "-" + album.titre;
+
+    // Crée l'image de la card
+    const image = document.createElement('img');
+    image.classList.add('card-img-top');
+    image.src = "albums/" + nomFic + ".jpg"; // Ajoute le nom du fichier et l'extension de l'image
+    image.alt = 'Card image cap';
+
+    // Ajoute l'image à la card
+    card.appendChild(image);
+	
+	// Crée le corps de la card
+	const cardBody = document.createElement('div');
+	cardBody.classList.add('card-body');
+
+	// Crée le titre de la card
+	const title = document.createElement('h5');
+	title.classList.add('card-title');
+	title.textContent = album.titre;
+
+	// Crée les détails de la card
+	const details = document.createElement('p');
+	details.classList.add('card-text');
+	details.textContent = `N°${album.numero}, Série: ${series.get(album.idSerie).nom}, Auteur: ${auteurs.get(album.idAuteur).nom}`;
+
+	// Ajoute les éléments à la card
+	cardBody.appendChild(title);
+	cardBody.appendChild(details);
+
+	card.appendChild(image);
+	card.appendChild(cardBody);
+
+	// Ajoute la card à la zone de résultats
+	document.getElementById('results').appendChild(card);
+}
 
 // Ajouter au panier ou retirer du panier
- // Attend que le document soit chargé avant d'exécuter le code jQuery
+// Attend que le document soit chargé avant d'exécuter le code jQuery
 // jQuery(document).ready(function ($) {
 
 //     // Déclaration des chemins des images par défaut
 //     const srcImg = "images/";
 //     const albumDefaultMini = srcImg + "noComicsMini.jpeg";
 //     const albumDefault = srcImg + "noComics.jpeg";
+
 //     const srcAlbumMini = "albumsMini/";
 //     const srcAlbum = "albums/";
 
