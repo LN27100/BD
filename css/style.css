@@ -172,3 +172,16 @@ h2 {
 	border-radius: 10px;
 	background-color: #857d7d;
 }
+
+/* FOOTER */
+body > footer > div > span {
+  color: white;
+}
+
+footer {
+justify-content: center;
+}
+
+.fab {
+  color: white;
+}

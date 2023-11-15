@@ -226,7 +226,7 @@ function displayResult(album) {
 
 
 
-// Ajouter au panier ou retirer du panier
+// AJOUTER OU RETIRER UN ALBUM DU PANIER
 // Attend que le document soit chargé avant d'exécuter le code jQuery
 // jQuery(document).ready(function ($) {
 
