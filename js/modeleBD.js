@@ -160,30 +160,47 @@ jQuery(document).ready(function ($) {
 
 
 //filtre pour barre de recherche.
-const searchInputSidenav = document.getElementById('search-input-sidenav');
-const sidenavOptions = document.querySelectorAll('#sidenav-3 li .sidenav-link');
 
-searchInputSidenav.addEventListener('input', () => {
-  const filter = searchInputSidenav.value.toLowerCase();
-  showSidenavOptions();
-  const valueExist = !!filter.length;
-
-  if (valueExist) {
-    sidenavOptions.forEach((el) => {
-      const elText = el.textContent.trim().toLowerCase();
-      const isIncluded = elText.includes(filter);
-      if (!isIncluded) {
-        el.style.display = 'none';
-      }
-    });
-  }
-});
-
-const showSidenavOptions = () => {
-  sidenavOptions.forEach((el) => {
-    el.style.display = 'flex';
+document.getElementById('searchButton').addEventListener('click', function() {
+	const radioByAlbum = document.getElementById('ChoixTwo');
+	const radioByAuteur = document.getElementById('ChoixOne');
+	const radioBySerie = document.getElementById('ChoixThree');
+	const searchInput = document.getElementById('search-input').value.toLowerCase();
+	const resultsContainer = document.getElementById('results');
+	resultsContainer.innerHTML = '';
+  
+	if (radioByAlbum.checked) {
+	  console.log("Recherche par album");
+	  albums.forEach(album => {
+		if (album.titre.toLowerCase().includes(searchInput)) {
+		  const result = document.createElement('p');
+		  result.textContent = album.titre + " N°" + album.numero + " Série:" + series.get(album.idSerie).nom + " Auteur:" + auteurs.get(album.idAuteur).nom;
+		  resultsContainer.appendChild(result);
+		}
+	  });
+	} else if (radioByAuteur.checked) {
+	  console.log("Recherche par auteur");
+	  auteurs.forEach(auteur => {
+		albums.forEach(album => {
+		  if (album.idAuteur === auteur.id && auteur.nom.toLowerCase().includes(searchInput)) {
+			const result = document.createElement('p');
+			result.textContent = auteur.nom + ", Album N°" + album.numero + " " + album.titre + ", Série:" + series.get(album.idSerie).nom;
+			resultsContainer.appendChild(result);
+		  }
+		});
+	  });
+	} else if (radioBySerie.checked) {
+	  console.log("Recherche par série");
+	  series.forEach(serie => {
+		albums.forEach(album => {
+		  if (album.idSerie === serie.id && serie.nom.toLowerCase().includes(searchInput)) {
+			const result = document.createElement('p');
+			result.textContent = serie.nom + ", Album N°" + album.numero + " " + album.titre + ", Auteur:" + auteurs.get(album.idAuteur).nom;
+			resultsContainer.appendChild(result);
+		  }
+		});
+	  });
+	} else {
+	  console.log("Veuillez sélectionner un critère de recherche.");
+	}
   });
-};
-
-
-
