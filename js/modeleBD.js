@@ -7,14 +7,14 @@ jQuery(document).ready(function ($) {
 
 
 
-	// AFFIHAGE DES BD
-	let txtSerie = document.getElementById("serie");
-	let txtNumero = document.getElementById("numero");
-	let txtTitre = document.getElementById("titre");
-	let txtAuteur = document.getElementById("auteur");
-	let txtPrix = document.getElementById("prix");
-	let imgAlbum = document.getElementById("album");
-	let imgAlbumMini = document.getElementById("albumMini");
+	// Affichage des BD
+	var txtSerie = document.getElementById("serie");
+	var txtNumero = document.getElementById("numero");
+	var txtTitre = document.getElementById("titre");
+	var txtAuteur = document.getElementById("auteur");
+	var txtPrix = document.getElementById("prix");
+	var imgAlbum = document.getElementById("album");
+	var imgAlbumMini = document.getElementById("albumMini");
 
 	imgAlbum.addEventListener("error", function () {
 		prbImg(this)
@@ -24,7 +24,7 @@ jQuery(document).ready(function ($) {
 		prbImg(this)
 	});
 
-	let id = document.getElementById("id");
+	var id = document.getElementById("id");
 	id.addEventListener("change", function () {
 		getAlbum(this)
 	});
@@ -38,7 +38,7 @@ jQuery(document).ready(function ($) {
 	 */
 	function getAlbum(num) {
 
-		let album = albums.get(num.value);
+		var album = albums.get(num.value);
 
 		if (album === undefined) {
 			txtSerie.value = "";
@@ -51,8 +51,8 @@ jQuery(document).ready(function ($) {
 
 		} else {
 
-			let serie = series.get(album.idSerie);
-			let auteur = auteurs.get(album.idAuteur);
+			var serie = series.get(album.idSerie);
+			var auteur = auteurs.get(album.idAuteur);
 
 			txtSerie.value = serie.nom;
 			txtNumero.value = album.numero;
@@ -60,7 +60,7 @@ jQuery(document).ready(function ($) {
 			txtAuteur.value = auteur.nom;
 			txtPrix.value = album.prix;
 
-			let nomFic = serie.nom + "-" + album.numero + "-" + album.titre;
+			var nomFic = serie.nom + "-" + album.numero + "-" + album.titre;
 
 			// Utilisation d'une expression régulière pour supprimer 
 			// les caractères non autorisés dans les noms de fichiers : '!?.":$
@@ -172,7 +172,7 @@ function searchByAuteur(searchInput) {
 function searchBySerie(searchInput) {
 for(let [idSerie, serie] of series.entries()) {
 	for (let [idAlbum, album] of albums.entries()) {
-		if (album.idSerie == idSerie) {
+		if (album.idSerie == idSerie && album.titre.toLowerCase().includes(searchInput)) {
 			console.log(serie.nom+", Album N°"+album.numero+" "+album.titre+", Auteur:"+auteurs.get(album.idAuteur).nom);
 			displayResult(album);
 		}
@@ -346,3 +346,4 @@ function displayResult(album) {
 //         // (Remplacez cette ligne par la logique réelle que vous souhaitez exécuter)
 //     }
 // });
+
