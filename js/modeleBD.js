@@ -138,7 +138,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // AJOUTER OU RETIRER UN ALBUM DU PANIER
-
 document.addEventListener("DOMContentLoaded", function () {
 	// Fonction pour ajouter un album au panier avec son prix
 	function addToCart(albumName, albumPrice) {
