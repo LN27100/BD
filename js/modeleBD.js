@@ -306,22 +306,22 @@ function displayResult(album) {
 	let nomFic = series.get(album.idSerie).nom + "-" + album.numero + "-" + album.titre;
 
 	// Définir le chemin vers l'image par défaut
-    const srcImg = "images/noComicsMini.jpeg";
+	const srcImg = "images/noComicsMini.jpeg";
 
-    // Crée l'image de la card
-    const image = document.createElement('img');
-    image.classList.add('card-img-top');
-    image.src = "albums/" + nomFic + ".jpg"; // Ajoute le nom du fichier et l'extension de l'image
-    image.alt = 'Card image cap';
+	// Crée l'image de la card
+	const image = document.createElement('img');
+	image.classList.add('card-img-top');
+	image.src = "albums/" + nomFic + ".jpg"; // Ajoute le nom du fichier et l'extension de l'image
+	image.alt = 'Card image cap';
 
-    // Gestionnaire d'événements pour l'erreur de chargement de l'image
-    image.onerror = function () {
-        // En cas d'erreur, charge l'image par défaut
-        image.src = srcImg;
-    };
+	// Gestionnaire d'événements pour l'erreur de chargement de l'image
+	image.onerror = function () {
+		// En cas d'erreur, charge l'image par défaut
+		image.src = srcImg;
+	};
 
-    // Ajoute l'image à la card
-    card.appendChild(image);
+	// Ajoute l'image à la card
+	card.appendChild(image);
 
 
 	// Crée le corps de la card
@@ -348,23 +348,23 @@ function displayResult(album) {
 	// Ajoute la card à la zone de résultats
 	document.getElementById('results').appendChild(card);
 
-	
+
 }
 
 
 
 // Fonction pour détecter et afficher le format de la fenêtre
 function detectAndDisplayFormat() {
-    const windowWidth = window.innerWidth;
+	const windowWidth = window.innerWidth;
 
-    if (windowWidth < 768) {
-        console.log("Petit écran");
-        displayAlbums('cards');
+	if (windowWidth < 768) {
+		console.log("Petit écran");
+		displayAlbums('cards');
 
-    } else {
-        console.log("Grand écran");
-        displayAlbums('table');
-    }
+	} else {
+		console.log("Grand écran");
+		displayAlbums('table');
+	}
 }
 
 // Appel initial de la fonction pour déterminer le format de la fenêtre
@@ -374,90 +374,97 @@ detectAndDisplayFormat();
 window.addEventListener('resize', detectAndDisplayFormat);
 
 function mapToAlbumsArray(albumsMap) {
-    const albumsArray = [];
+	const albumsArray = [];
 
-    for (const [key, value] of albumsMap) {
-        const album = {
-            id: key,
-            titre: value.titre,
-            numero: value.numero,
-            idSerie: value.idSerie,
-            idAuteur: value.idAuteur,
-            prix: parseFloat(value.prix) // Convertir en nombre si nécessaire
-        };
-        albumsArray.push(album);
-    }
+	for (const [key, value] of albumsMap) {
+		const album = {
+			id: key,
+			titre: value.titre,
+			numero: value.numero,
+			idSerie: value.idSerie,
+			idAuteur: value.idAuteur,
+			prix: parseFloat(value.prix)
+		};
+		albumsArray.push(album);
+	}
 
-    return albumsArray;
+	return albumsArray;
 }
 
 async function displayAlbums(viewType) {
-    const albumsArray = mapToAlbumsArray(albums);
+	const albumsArray = mapToAlbumsArray(albums);
 
-    const container = viewType === 'cards' ? document.getElementById('results') : document.getElementById('albumTable');
-    container.innerHTML = '';
+	const container = viewType === 'cards' ? document.getElementById('results') : document.getElementById('albumTable');
+	container.innerHTML = '';
 
-    if (viewType === 'table') {
-        displayAlbumsAsTable(albumsArray, container);
-    } else {
-        displayAlbumsAsCards(albumsArray, container);
-    }
+	if (viewType === 'table') {
+		displayAlbumsAsTable(albumsArray, container);
+	} else {
+		displayAlbumsAsCards(albumsArray, container);
+	}
 }
 
 function displayAlbumsAsTable(albumsData, container) {
-    const table = document.createElement('table');
-    table.classList.add('album-table');
+	const table = document.createElement('table');
+	table.classList.add('album-table');
 
-    const tableHeader = document.createElement('thead');
-    const headerRow = document.createElement('tr');
-    headerRow.innerHTML = `
+	const tableHeader = document.createElement('thead');
+	const headerRow = document.createElement('tr');
+
+	headerRow.innerHTML = `
+		<th>Image</th>
         <th>Série</th>
         <th>Numéro</th>
         <th>Titre</th>
         <th>Auteur</th>
         <th>Prix</th>
     `;
-    tableHeader.appendChild(headerRow);
-    table.appendChild(tableHeader);
 
-    const tableBody = document.createElement('tbody');
+	tableHeader.appendChild(headerRow);
+	table.appendChild(tableHeader);
 
-    albumsData.forEach(album => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${album.idSerie}</td>
+	const tableBody = document.createElement('tbody');
+
+	albumsData.forEach(album => {
+		const row = document.createElement('tr');
+
+		row.innerHTML = `
+			<img src="albums/" + serie.nom + '-' + album.numero + '-' + album.titre >
+			<td>${album.idSerie}</td>
             <td>${album.numero}</td>
             <td>${album.titre}</td>
             <td>${album.idAuteur}</td>
             <td>${album.prix}</td>
+		
         `;
-        tableBody.appendChild(row);
-    });
+		tableBody.appendChild(row);
+	});
 
-    table.appendChild(tableBody);
-    container.appendChild(table);
+	table.appendChild(tableBody);
+	container.appendChild(table);
 }
 
 function displayAlbumsAsCards(albumsData, container) {
-    const cardContainer = document.createElement('div'); // Crée un conteneur temporaire
+	const cardContainer = document.createElement('div'); // Crée un conteneur temporaire
 
-    albumsData.forEach(album => {
-        const cardHTML = `
-            <!-- Structure HTML d'une carte d'album -->
+	albumsData.forEach(album => {
+		const cardHTML = `
             <div class="col-6 mb-4">
                 <div class="card">
                     <img src="albums/${album.idSerie}-${album.numero}-${album.titre}.jpg" class="card-img-top" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">${album.titre}</h5>
                         <p class="card-text">N°${album.numero}, Série: ${album.idSerie}, Auteur: ${album.idAuteur}</p>
-                        <!-- Vous pouvez ajouter d'autres éléments de la carte ici si nécessaire -->
+						<a href="#" class="btn addToCartButton">Ajouter au panier</a>
+           				 <a href="#" class="btn removeFromCartButton ">Retirer du panier</a>
                     </div>
                 </div>
             </div>
         `;
-        cardContainer.innerHTML += cardHTML;
-    });
+		cardContainer.innerHTML += cardHTML;
+	});
 
-    container.appendChild(cardContainer); // Ajoute toutes les cartes une seule fois
+	container.appendChild(cardContainer); // Ajoute toutes les cartes une seule fois
 }
 
+// FONCTION PAGINATION

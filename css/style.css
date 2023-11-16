@@ -55,8 +55,6 @@ input:focus:invalid {
 
 body {
   background-image: url(/images/backgroundAccueil.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
 
 }
 
@@ -226,4 +224,24 @@ justify-content: center;
 /* Opacité pour l'effet de transition */
 #albumMini.transition-effect, #album.transition-effect {
   opacity: 0; /* L'image est invisible (opacité à 0) */
+}
+
+
+.album-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.album-table th, .album-table td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: left;
+}
+#albumTable > table > thead > tr {
+  font-size: 1.5rem;
+
+}
+body > div.container > main > div > div {
+  background: linear-gradient(0deg, rgba(90,88,88,1) 23%, rgba(90,88,88,1) 40%, rgba(135,131,132,1) 69%, rgba(151,147,148,1) 83%);
+  color: white;
 }
