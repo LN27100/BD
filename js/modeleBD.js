@@ -133,12 +133,36 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Mettre à jour le total du panier avec le prix de l'album
         let currentTotal = parseFloat(cartTotal.textContent) || 0; // Utiliser parseFloat pour gérer les prix décimaux
-
         currentTotal += albumPrice;
         cartTotal.textContent = currentTotal.toFixed(2); // Mettre à jour le total avec le prix de l'album (arrondi à 2 décimales)
 
         // Afficher un message de confirmation (vous pouvez personnaliser cela)
         alert(`L'album "${albumName}" a été ajouté au panier pour ${albumPrice}$.`);
+    }
+
+    // Fonction pour retirer un album du panier avec son prix
+    function removeFromCart(albumName, albumPrice) {
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const items = cartItems.getElementsByTagName('li');
+
+        // Parcourir les éléments du panier pour trouver et retirer l'album correspondant
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            if (item.textContent.includes(albumName)) {
+                const itemPrice = parseFloat(item.textContent.match(/Prix : (\d+\.\d+)/)[1]);
+                cartItems.removeChild(item); // Retirer l'élément correspondant de la liste du panier
+                // Mettre à jour le total du panier en retirant le prix de l'album retiré
+                let currentTotal = parseFloat(cartTotal.textContent) || 0;
+                currentTotal -= itemPrice;
+                cartTotal.textContent = currentTotal.toFixed(2);
+                // Afficher un message de confirmation (vous pouvez personnaliser cela)
+                alert(`L'album "${albumName}" a été retiré du panier.`);
+                return; // Arrêter la boucle après avoir retiré l'album
+            }
+        }
+        // Si l'album n'est pas trouvé dans le panier
+        alert(`L'album "${albumName}" n'est pas dans le panier.`);
     }
 
     // Sélection de tous les boutons avec la classe "addToCartButton"
@@ -151,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const card = event.target.closest('.card');
 
             // Récupération du nom et du prix de l'album à partir de la carte
-			const albumName = card.querySelector('#titre').value;
+            const albumName = card.querySelector('#titre').value;
             const albumPrice = parseFloat(card.querySelector('#prix').value) || 0;
 
             // Appel de la fonction d'ajout au panier avec le nom et le prix de l'album
@@ -162,8 +186,29 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
-});
 
+    // Sélection de tous les boutons "Retirer du panier"
+    const removeFromCartButtons = document.querySelectorAll('.removeFromCartButton');
+
+    // Ajout d'un écouteur d'événements pour chaque bouton "Retirer du panier"
+    removeFromCartButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            // Récupération de la carte parente du bouton cliqué
+            const card = event.target.closest('.card');
+
+            // Récupération du nom et du prix de l'album à partir de la carte
+            const albumName = card.querySelector('#titre').value;
+            const albumPrice = parseFloat(card.querySelector('#prix').value) || 0;
+
+            // Appel de la fonction de retrait du panier avec le nom et le prix de l'album
+            if (albumPrice > 0) {
+                removeFromCart(albumName, albumPrice);
+            } else {
+                alert('Prix invalide pour cet album.');
+            }
+        });
+    });
+});
 
 //BARRE DE RECHERCHE AVEC FILTRES
 
