@@ -213,3 +213,14 @@ justify-content: center;
 .cart li {
   margin-bottom: 5px;
 }
+
+
+/* Effet de transition */
+.transition-effect {
+  transition: opacity 0.5s ease; /* Transition sur l'opacité pendant 0.5 seconde */
+}
+
+/* Opacité pour l'effet de transition */
+#albumMini.transition-effect, #album.transition-effect {
+  opacity: 0; /* L'image est invisible (opacité à 0) */
+}
