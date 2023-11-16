@@ -275,3 +275,26 @@ justify-content: center;
   color: white;
   background: linear-gradient(0deg, rgba(110, 109, 107, 0.7287289915966386) 20%, rgba(69, 69, 69, 0.6530987394957983) 45%);
 }
+
+#offcanvasExample > div.offcanvas-body > a > button {
+  border-radius: 5px;
+  color: white;
+  background: linear-gradient(0deg, rgba(110, 109, 107, 0.7287289915966386) 20%, rgba(69, 69, 69, 0.6530987394957983) 45%);
+}
+
+#offcanvasExample > div.offcanvas-body > a > button:hover {
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
+  background: linear-gradient(0deg, rgba(133, 125, 125, 1) 10%, rgba(189, 189, 189, 1) 55%);
+  border-radius: 5px;
+}
+
+#offcanvasExample {
+  background: linear-gradient(0deg, rgba(198,177,177,1) 23%, rgba(220,202,202,0.6839110644257703) 83%);
+}
+
+#offcanvasExampleLabel {
+  text-decoration: underline;
+  font-weight: bold;
+}
