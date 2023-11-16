@@ -148,44 +148,35 @@ const cartTotal = document.getElementById('cartTotal');
 
 document.addEventListener("DOMContentLoaded", function () {
 	// Fonction pour AJOUTER un album au panier avec son prix
-	function addToCart(albumName, albumPrice) {
+function addToCart(albumName, albumPrice) {
+    const newItem = document.createElement('li');
+    newItem.textContent = `${albumName} - Prix : ${albumPrice}€`;
 
+    cartItems.appendChild(newItem);
 
-		// Créer un nouvel élément li pour l'album ajouté
-		const newItem = document.createElement('li');
-		newItem.textContent = `${albumName} - Prix : ${albumPrice}€`; // Afficher le nom de l'album et son prix
+    let currentTotal = parseFloat(cartTotal.textContent) || 0;
+    currentTotal += albumPrice;
+    cartTotal.textContent = currentTotal.toFixed(2);
+}
 
-		// Ajouter l'album à la liste du panier
-		cartItems.appendChild(newItem);
+// Fonction pour RETIRER un article du panier avec son prix
+function removeFromCart(articleName, articlePrice) {
+    const items = cartItems.getElementsByTagName('li');
 
-		// Mise à jour du total du panier avec le prix de l'article
-		let currentTotal = parseFloat(cartTotal.textContent) || 0; // Gestion des prix décimaux
-		currentTotal += albumPrice;
-		cartTotal.textContent = currentTotal.toFixed(2); // Mise à jour du total avec le prix de l'article (arrondi à 2 décimales)
-	}
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        if (item.textContent.includes(articleName)) {
+            const itemPrice = parseFloat(item.textContent.match(/Prix : (\d+\.\d+)/)[1]);
+            cartItems.removeChild(item);
 
-	// Fonction pour RETIRER un article du panier avec son prix
-	function removeFromCart(articleName, articlePrice) {
-		const items = cartItems.getElementsByTagName('li');
-
-		// Parcours des éléments du panier pour trouver et retirer l'article correspondant
-		for (let i = 0; i < items.length; i++) {
-			const item = items[i];
-			if (item.textContent.includes(articleName)) {
-				const itemPrice = parseFloat(item.textContent.match(/Prix : (\d+\.\d+)/)[1]);
-				cartItems.removeChild(item); // Retrait de l'article correspondant de la liste du panier
-
-				// Mise à jour du total du panier en retirant le prix de l'article retiré
-				let currentTotal = parseFloat(cartTotal.textContent) || 0;
-				currentTotal -= itemPrice;
-				cartTotal.textContent = currentTotal.toFixed(2);
-				return; // Arrêt de la boucle après avoir retiré l'article
-			}
-		}
-		// Si l'album n'est pas trouvé dans le panier
-		alert(`L'album "${albumName}" n'est pas dans le panier.`);
-	}
-
+            let currentTotal = parseFloat(cartTotal.textContent) || 0;
+            currentTotal -= itemPrice;
+            cartTotal.textContent = currentTotal.toFixed(2);
+            return;
+        }
+    }
+    alert(`L'album "${articleName}" n'est pas dans le panier.`);
+}
 	// Sélection de tous les boutons avec la classe "addToCartButton"
 	const addToCartButtons = document.querySelectorAll('.addToCartButton');
 
