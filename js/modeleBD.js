@@ -1,109 +1,61 @@
+// SUPPRESSION DU JQUERY DE BASE POUR UTILISER DES FONTIONS FULL JS
 document.addEventListener('DOMContentLoaded', function () {
-    // Définition des chemins vers les images par défaut et les répertoires d'images
-    const srcImg = 'images/';
-    const albumDefaultMini = srcImg + 'noComicsMini.jpeg';
-    const albumDefault = srcImg + 'noComics.jpeg';
-    const srcAlbumMini = 'albumsMini/';
-    const srcAlbum = 'albums/';
+	// Définition des chemins vers les images par défaut et les répertoires d'images
+	const srcImg = 'images/';
+	const albumDefaultMini = srcImg + 'noComicsMini.jpeg';
+	const albumDefault = srcImg + 'noComics.jpeg';
+	const srcAlbumMini = 'albumsMini/';
+	const srcAlbum = 'albums/';
 
-    // Sélection des éléments du DOM
-    const txtSerie = document.querySelector('#serie');
-    const txtNumero = document.querySelector('#numero');
-    const txtTitre = document.querySelector('#titre');
-    const txtAuteur = document.querySelector('#auteur');
-    const txtPrix = document.querySelector('#prix');
-    const imgAlbum = document.querySelector('#album');
-    const imgAlbumMini = document.querySelector('#albumMini');
+	// Sélection des éléments du DOM
+	const txtSerie = document.querySelector('#serie');
+	const txtNumero = document.querySelector('#numero');
+	const txtTitre = document.querySelector('#titre');
+	const txtAuteur = document.querySelector('#auteur');
+	const txtPrix = document.querySelector('#prix');
+	const imgAlbum = document.querySelector('#album');
+	const imgAlbumMini = document.querySelector('#albumMini');
 
-    // Gestion des événements d'erreur pour les images
-    imgAlbum.addEventListener('error', handleImageError);
-    imgAlbumMini.addEventListener('error', handleImageError);
+	// Gestion des événements d'erreur pour les images
+	imgAlbum.addEventListener('error', handleImageError);
+	imgAlbumMini.addEventListener('error', handleImageError);
 
-    const id = document.querySelector('#id');
-    id.addEventListener('change', function () {
-        getAlbum(this);
-    });
+	const id = document.querySelector('#id');
+	id.addEventListener('change', function () {
+		getAlbum(this);
+	});
 
-    function getAlbum(num) {
-        const albumId = num.value;
 
-        const albumDetails = getAlbumDetails(albumId);
-        if (!albumDetails) {
-            clearAlbumDetails();
-            afficheAlbums(imgAlbumMini, imgAlbum, srcAlbumMini + 'defaultMini.jpeg', srcAlbum + 'default.jpeg');
-        } else {
-            const cheminImageMiniature = srcAlbumMini + albumDetails.imageMiniature;
-            const cheminImageNormale = srcAlbum + albumDetails.imageNormale;
-
-            displayAlbumDetails(albumDetails);
-            afficheAlbums(imgAlbumMini, imgAlbum, cheminImageMiniature, cheminImageNormale);
-        }
-    }
-
-    function displayAlbumDetails(albumDetails) {
-        txtSerie.value = albumDetails.serie;
-        txtNumero.value = albumDetails.numero;
-        txtTitre.value = albumDetails.titre;
-        txtAuteur.value = albumDetails.auteur;
-        txtPrix.value = albumDetails.prix;
-    }
-
-    function clearAlbumDetails() {
-        txtSerie.value = '';
-        txtNumero.value = '';
-        txtTitre.value = '';
-        txtAuteur.value = '';
-        txtPrix.value = 0;
-    }
-
-    function afficheAlbums(albumMini, album, nomFicMini, nomFic) {
-        albumMini.src = nomFicMini;
-        album.src = nomFic;
-
-        addTransitionEffect(albumMini);
-        addTransitionEffect(album);
-    }
-
-    function addTransitionEffect(element) {
-        element.classList.add('transition-effect');
-        setTimeout(() => {
-            element.classList.remove('transition-effect');
-        }, 1000);
-    }
-
-    function getAlbum(num) {
+	// Fonction pour obtenir les détails de l'album en fonction de son ID
+	function getAlbum(num) {
 		const albumId = num.value;
-	
-		// Utiliser ici la logique pour récupérer les détails de l'album à partir de son ID
-		const album = albums.get(albumId);
-	
-		if (!album) {
+
+		const albumDetails = getAlbumDetails(albumId);
+		if (!albumDetails) {
+			// Si les détails ne sont pas disponibles, affiche les images par défaut
 			clearAlbumDetails();
-			afficheAlbums(imgAlbumMini, imgAlbum, albumDefaultMini, albumDefault);
+			afficheAlbums(imgAlbumMini, imgAlbum, srcAlbumMini + 'defaultMini.jpeg', srcAlbum + 'default.jpeg');
 		} else {
-			const serie = series.get(album.idSerie);
-			const auteur = auteurs.get(album.idAuteur);
-	
-			txtSerie.value = serie.nom;
-			txtNumero.value = album.numero;
-			txtTitre.value = album.titre;
-			txtAuteur.value = auteur.nom;
-			txtPrix.value = album.prix;
-	
-			let nomFic = serie.nom + '-' + album.numero + '-' + album.titre;
-	
-			// Utilisation d'une expression régulière pour supprimer les caractères non autorisés dans les noms de fichiers : '!?.":$
-			nomFic = nomFic.replace(/'|!|\?|\.|"|:|\$/g, '');
-	
-			afficheAlbums(
-				imgAlbumMini,
-				imgAlbum,
-				srcAlbumMini + nomFic + '.jpg',
-				srcAlbum + nomFic + '.jpg'
-			);
+			// Si les détails sont disponibles, affiche les détails et les images correspondantes
+			const cheminImageMiniature = srcAlbumMini + albumDetails.imageMiniature;
+			const cheminImageNormale = srcAlbum + albumDetails.imageNormale;
+
+			displayAlbumDetails(albumDetails);
+			afficheAlbums(imgAlbumMini, imgAlbum, cheminImageMiniature, cheminImageNormale);
 		}
 	}
-	
+
+
+	// Fonction pour afficher les détails de l'album dans les éléments de l'interface utilisateur
+	function displayAlbumDetails(albumDetails) {
+		txtSerie.value = albumDetails.serie;
+		txtNumero.value = albumDetails.numero;
+		txtTitre.value = albumDetails.titre;
+		txtAuteur.value = albumDetails.auteur;
+		txtPrix.value = albumDetails.prix;
+	}
+
+	// Fonction pour réinitialiser les champs de détails d'album
 	function clearAlbumDetails() {
 		txtSerie.value = '';
 		txtNumero.value = '';
@@ -112,11 +64,77 @@ document.addEventListener('DOMContentLoaded', function () {
 		txtPrix.value = 0;
 	}
 
-    function handleImageError(img) {
-        img.src = './noComics.jpeg';
-        img.alt = 'Image non disponible';
-        img.onerror = null;
-    }
+	// Fonction pour afficher les images de l'album avec un effet de transition
+	function afficheAlbums(albumMini, album, nomFicMini, nomFic) {
+		albumMini.src = nomFicMini;
+		album.src = nomFic;
+
+		addTransitionEffect(albumMini);
+		addTransitionEffect(album);
+	}
+
+	// Fonction pour ajouter un effet de transition à un élément spécifié
+	function addTransitionEffect(element) {
+		element.classList.add('transition-effect');
+		setTimeout(() => {
+			element.classList.remove('transition-effect');
+		}, 1000);
+	}
+
+	function getAlbum(num) {
+		const albumId = num.value;
+
+		// Récupère les détails de l'album en utilisant son ID dans la collection d'albums
+		const album = albums.get(albumId);
+
+		// Si l'album n'est pas trouvé, efface les détails affichés et montre des images par défaut
+		if (!album) {
+			clearAlbumDetails();
+			afficheAlbums(imgAlbumMini, imgAlbum, albumDefaultMini, albumDefault);
+
+			// Si l'album est trouvé, récupère les détails de la série et de l'auteur associés à cet album
+		} else {
+			const serie = series.get(album.idSerie);
+			const auteur = auteurs.get(album.idAuteur);
+
+			// Met à jour les champs d'affichage avec les détails de l'album, de la série et de l'auteur
+			txtSerie.value = serie.nom;
+			txtNumero.value = album.numero;
+			txtTitre.value = album.titre;
+			txtAuteur.value = auteur.nom;
+			txtPrix.value = album.prix;
+
+			// Crée un nom de fichier pour les images de l'album en combinant les détails de l'album
+			let nomFic = serie.nom + '-' + album.numero + '-' + album.titre;
+
+			// Utilisation d'une expression régulière pour supprimer les caractères non autorisés dans les noms de fichiers : '!?.":$
+			nomFic = nomFic.replace(/'|!|\?|\.|"|:|\$/g, '');
+
+			// Affiche les images de l'album en utilisant les chemins appropriés basés sur le nom de fichier construit
+			afficheAlbums(
+				imgAlbumMini,
+				imgAlbum,
+				srcAlbumMini + nomFic + '.jpg',
+				srcAlbum + nomFic + '.jpg'
+			);
+		}
+	}
+
+	// Fonction pour effacer les détails affichés de l'album
+	function clearAlbumDetails() {
+		txtSerie.value = '';
+		txtNumero.value = '';
+		txtTitre.value = '';
+		txtAuteur.value = '';
+		txtPrix.value = 0;
+	}
+
+	// Fonction pour gérer les erreurs d'image
+	function handleImageError(img) {
+		img.src = './noComics.jpeg';
+		img.alt = 'Image non disponible';
+		img.onerror = null;
+	}
 });
 
 // AJOUTER OU RETIRER UN ALBUM DU PANIER
