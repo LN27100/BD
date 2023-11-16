@@ -113,7 +113,12 @@ body>div.container>div.wrapper>div>div>div {
   background: linear-gradient(0deg, rgba(110, 109, 107, 0.7287289915966386) 20%, rgba(69, 69, 69, 0.6530987394957983) 45%);
 }
 
-
+#envoyer {
+  margin: 1rem;
+  border-radius: 5px;
+  color: white;
+  background: linear-gradient(0deg, rgba(110, 109, 107, 0.7287289915966386) 20%, rgba(69, 69, 69, 0.6530987394957983) 45%);
+}
 
 #change-password {
   margin: 1rem;
