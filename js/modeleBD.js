@@ -361,7 +361,7 @@ function displayResult(album) {
 function detectAndDisplayFormat() {
 	const windowWidth = window.innerWidth;
 
-	if (windowWidth < 768) {
+	if (windowWidth < 800) {
 		console.log("Petit écran");
 		displayAlbums('cards');
 
@@ -466,6 +466,7 @@ function displayAlbumsAsTable(albumsData, container) {
         <th>Auteur</th>
         <th>Prix</th>
 		<th>Ajouter au panier</th>
+        <th>Retirer du panier</th>
     `;
 
 	tableHeader.appendChild(headerRow);
@@ -483,7 +484,8 @@ function displayAlbumsAsTable(albumsData, container) {
             <td>${album.titre}</td>
             <td>${album.idAuteur}</td>
             <td>${album.prix}€</td>
-		
+			<td><button class="btn addToCartButton">Ajouter au panier</button></td>
+            <td><button class=" btn removeFromCartButton">Retirer du panier</button></td>
         `;
 		tableBody.appendChild(row);
 	});
@@ -503,8 +505,9 @@ function displayAlbumsAsCards(albumsData, container) {
                     <div class="card-body">
                         <h5 class="card-title">${album.titre}</h5>
                         <p class="card-text">N°${album.numero}, Série: ${album.idSerie}, Auteur: ${album.idAuteur}</p>
-						<a href="#" class="btn addToCartButton">Ajouter au panier</a>
-           				 <a href="#" class="btn removeFromCartButton ">Retirer du panier</a>
+						<button class="btn addToCartButton">Ajouter au panier</button>
+                    	<button class="btn removeFromCartButton">Retirer du panier</button>
+                </div>
                     </div>
                 </div>
             </div>
