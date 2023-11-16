@@ -403,49 +403,54 @@ async function displayAlbums(viewType) {
 		displayAlbumsAsCards(albumsArray, container);
 	}
 }
-
 function displayAlbumsAsTable(albumsData, container) {
-	const table = document.createElement('table');
-	table.classList.add('album-table');
+	const tableContainer = document.createElement('div'); // Crée une div conteneur
+	tableContainer.classList.add('album-table-container'); // Ajoute la classe pour le style
 
-	const tableHeader = document.createElement('thead');
-	const headerRow = document.createElement('tr');
+	const table = document.createElement('table'); // Crée un élément tableau
+	table.classList.add('album-table'); // Ajoute la classe pour le style
+
+	const tableHeader = document.createElement('thead'); // Crée l'en-tête du tableau
+	const headerRow = document.createElement('tr'); // Crée une ligne d'en-tête
 
 	headerRow.innerHTML = `
 		<th>Image</th>
-        <th>Série</th>
-        <th>Numéro</th>
-        <th>Titre</th>
-        <th>Auteur</th>
-        <th>Prix</th>
-    `;
+		<th>Série</th>
+		<th>Numéro</th>
+		<th>Titre</th>
+		<th>Auteur</th>
+		<th>Prix</th>
+	`;
 
-	tableHeader.appendChild(headerRow);
-	table.appendChild(tableHeader);
+	tableHeader.appendChild(headerRow); // Ajoute la ligne d'en-tête à l'en-tête du tableau
+	table.appendChild(tableHeader); // Ajoute l'en-tête au tableau
 
-	const tableBody = document.createElement('tbody');
+	const tableBody = document.createElement('tbody'); // Crée le corps du tableau
 
+	// Parcourt les données des albums et crée les lignes du tableau
 	albumsData.forEach(album => {
-		const row = document.createElement('tr');
+		const row = document.createElement('tr'); // Crée une ligne
 
+		// Remplit la ligne avec les données de l'album
 		row.innerHTML = `
-			<img src="albums/" + serie.nom + '-' + album.numero + '-' + album.titre >
-			<td>${album.idSerie}</td>
-            <td>${album.numero}</td>
-            <td>${album.titre}</td>
-            <td>${album.idAuteur}</td>
-            <td>${album.prix}</td>
-		
-        `;
-		tableBody.appendChild(row);
+		<img src="albums/" + serie.nom + '-' + album.numero + '-' + album.titre >
+		<td>${album.idSerie}</td>
+			<td>${album.numero}</td>
+			<td>${album.titre}</td>
+			<td>${album.idAuteur}</td>
+			<td>${album.prix}</td>
+		`;
+		tableBody.appendChild(row); // Ajoute la ligne au corps du tableau
 	});
 
-	table.appendChild(tableBody);
-	container.appendChild(table);
+	table.appendChild(tableBody); // Ajoute le corps au tableau
+	tableContainer.appendChild(table); // Ajoute le tableau à la div conteneur
+	container.appendChild(tableContainer); // Ajoute la div conteneur au conteneur principal
 }
 
+
 function displayAlbumsAsCards(albumsData, container) {
-	const cardContainer = document.createElement('div'); // Crée un conteneur temporaire
+	const cardContainer = document.createElement('div'); 
 
 	albumsData.forEach(album => {
 		const cardHTML = `

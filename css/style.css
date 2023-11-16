@@ -226,6 +226,13 @@ justify-content: center;
   opacity: 0; /* L'image est invisible (opacité à 0) */
 }
 
+.containerTwo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(0deg, rgba(90,88,88,1) 23%, rgba(90,88,88,1) 40%, rgba(135,131,132,1) 69%, rgba(151,147,148,1) 83%);
+  color: white;
+}
 
 .album-table {
   border-collapse: collapse;
@@ -240,8 +247,4 @@ justify-content: center;
 #albumTable > table > thead > tr {
   font-size: 1.5rem;
 
-}
-body > div.container > main > div > div {
-  background: linear-gradient(0deg, rgba(90,88,88,1) 23%, rgba(90,88,88,1) 40%, rgba(135,131,132,1) 69%, rgba(151,147,148,1) 83%);
-  color: white;
 }
