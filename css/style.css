@@ -260,3 +260,18 @@ justify-content: center;
 .btn {
   background: linear-gradient(0deg, rgba(133, 125, 125, 1) 10%, rgba(189, 189, 189, 1) 55%);
 }
+
+.return {
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
+  background: linear-gradient(0deg, rgba(133, 125, 125, 1) 10%, rgba(189, 189, 189, 1) 55%);
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.return:hover {
+  color: white;
+  background: linear-gradient(0deg, rgba(110, 109, 107, 0.7287289915966386) 20%, rgba(69, 69, 69, 0.6530987394957983) 45%);
+}

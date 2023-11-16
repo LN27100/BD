@@ -113,7 +113,9 @@ body>div.container>div.wrapper>div>div>div {
   background: linear-gradient(0deg, rgba(110, 109, 107, 0.7287289915966386) 20%, rgba(69, 69, 69, 0.6530987394957983) 45%);
 }
 
-#envoyer {
+.buttonSubmit {
+  text-decoration: none;
+  text-align: center;
   margin: 1rem;
   border-radius: 5px;
   color: white;
@@ -131,12 +133,28 @@ body>div.container>div.wrapper>div>div>div>p {
   text-align: center;
   margin-top: 1rem;
   text-decoration: underline;
+  font-weight: bold;
 }
 
-body > div.container > div.wrapper > div > div > div > div.container > h1 {
-  font-size: 1.5rem;
+body > div.container > div.wrapper > div > div > div > label {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+body > div.container > div.wrapper > div > div > div > div > label {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+body > div.container > div.wrapper > div > div > div > div.container > div > label {
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 body > div.container > div.wrapper > div > div > div > div.container {
   border: solid 2px grey;
+}
+
+body > div.container > div.wrapper > div > div > div > div.container > h1 {
+  font-size: 1.5rem;
 }
