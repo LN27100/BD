@@ -298,62 +298,66 @@ function searchBySerie(searchInput) {
 
 // AFFICHER LE RESULTAT DE LA RECHERCHE DANS UNE CARD
 function displayResult(album) {
-	// Crée une card pour chaque résultat
-	const card = document.createElement('div');
-	card.classList.add('col-sm-6', 'col-md-4', 'col-lg-3', 'mb-4');
+    // Crée une card pour chaque résultat
+    const card = document.createElement('div');
+    card.classList.add('col-sm-6', 'col-md-4', 'col-lg-3', 'mb-4');
 
-	// Utilise l'id de la série pour obtenir le nom de la série
-	let nomFic = series.get(album.idSerie).nom + "-" + album.numero + "-" + album.titre;
+    // Utilise l'id de la série pour obtenir le nom de la série
+    let nomFic = series.get(album.idSerie).nom + "-" + album.numero + "-" + album.titre;
 
-	// Définir le chemin vers l'image par défaut
-	const srcImg = "images/noComicsMini.jpeg";
+    // Définir le chemin vers l'image par défaut
+    const srcImg = "images/noComicsMini.jpeg";
 
-	// Crée l'image de la card
-	const image = document.createElement('img');
-	image.classList.add('card-img-top');
-	image.src = "albums/" + nomFic + ".jpg"; // Ajoute le nom du fichier et l'extension de l'image
-	image.alt = 'Card image cap';
+    // Crée l'image de la card
+    const image = document.createElement('img');
+    image.classList.add('card-img-top');
+    image.src = "albums/" + nomFic + ".jpg"; // Ajoute le nom du fichier et l'extension de l'image
+    image.alt = 'Card image cap';
 
-	// Gestionnaire d'événements pour l'erreur de chargement de l'image
-	image.onerror = function () {
-		// En cas d'erreur, charge l'image par défaut
-		image.src = srcImg;
-	};
+    // Gestionnaire d'événements pour l'erreur de chargement de l'image
+    image.onerror = function () {
+        // En cas d'erreur, charge l'image par défaut
+        image.src = srcImg;
+    };
 
-	// Ajoute l'image à la card
-	card.appendChild(image);
+    // Crée le corps de la card
+    const cardBody = document.createElement('div');
+    cardBody.classList.add('card-body');
 
+    // Crée le titre de la card
+    const title = document.createElement('h5');
+    title.classList.add('card-title');
+    title.textContent = album.titre;
 
-	// Crée le corps de la card
-	const cardBody = document.createElement('div');
-	cardBody.classList.add('card-body');
+    // Crée les détails de la card
+    const details = document.createElement('p');
+    details.classList.add('card-text');
+    details.textContent = `N°${album.numero}, Série: ${series.get(album.idSerie).nom}, Auteur: ${auteurs.get(album.idAuteur).nom}`;
 
-	// Crée le titre de la card
-	const title = document.createElement('h5');
-	title.classList.add('card-title');
-	title.textContent = album.titre;
+    // Crée les boutons "Ajouter au panier" et "Retirer du panier"
+    const addToCartButton = document.createElement('a');
+    addToCartButton.classList.add('btn', 'addToCartButton');
+    addToCartButton.textContent = 'Ajouter au panier';
 
-	// Crée les détails de la card
-	const details = document.createElement('p');
-	details.classList.add('card-text');
-	details.textContent = `N°${album.numero}, Série: ${series.get(album.idSerie).nom}, Auteur: ${auteurs.get(album.idAuteur).nom}`;
+    const removeFromCartButton = document.createElement('a');
+    removeFromCartButton.classList.add('btn', 'removeFromCartButton');
+    removeFromCartButton.textContent = 'Retirer du panier';
 
-	// Ajoute les éléments à la card
-	cardBody.appendChild(title);
-	cardBody.appendChild(details);
+    // Ajoute les éléments à la card
+    cardBody.appendChild(title);
+    cardBody.appendChild(details);
+    cardBody.appendChild(addToCartButton);
+    cardBody.appendChild(removeFromCartButton);
 
-	card.appendChild(image);
-	card.appendChild(cardBody);
+    card.appendChild(image);
+    card.appendChild(cardBody);
 
-	// Ajoute la card à la zone de résultats
-	document.getElementById('results').appendChild(card);
-
-
+    // Ajoute la card à la zone de résultats
+    document.getElementById('results').appendChild(card);
 }
 
 
-
-// Fonction pour détecter et afficher le format de la fenêtre
+//FONCTION POUR AFFICHER LE MODE TABLEAU OU CARD SELON LA TAILLE DE L'ECRAN
 function detectAndDisplayFormat() {
 	const windowWidth = window.innerWidth;
 
@@ -447,7 +451,46 @@ function displayAlbumsAsTable(albumsData, container) {
 	tableContainer.appendChild(table); // Ajoute le tableau à la div conteneur
 	container.appendChild(tableContainer); // Ajoute la div conteneur au conteneur principal
 }
+function displayAlbumsAsTable(albumsData, container) {
+	const table = document.createElement('table');
+	table.classList.add('album-table');
 
+	const tableHeader = document.createElement('thead');
+	const headerRow = document.createElement('tr');
+
+	headerRow.innerHTML = `
+		<th>Image</th>
+        <th>Série</th>
+        <th>Numéro</th>
+        <th>Titre</th>
+        <th>Auteur</th>
+        <th>Prix</th>
+		<th>Ajouter au panier</th>
+    `;
+
+	tableHeader.appendChild(headerRow);
+	table.appendChild(tableHeader);
+
+	const tableBody = document.createElement('tbody');
+
+	albumsData.forEach(album => {
+		const row = document.createElement('tr');
+
+		row.innerHTML = `
+			<img src="albums/" + serie.nom + '-' + album.numero + '-' + album.titre >
+			<td>${album.idSerie}</td>
+            <td>${album.numero}</td>
+            <td>${album.titre}</td>
+            <td>${album.idAuteur}</td>
+            <td>${album.prix}€</td>
+		
+        `;
+		tableBody.appendChild(row);
+	});
+
+	table.appendChild(tableBody);
+	container.appendChild(table);
+}
 
 function displayAlbumsAsCards(albumsData, container) {
 	const cardContainer = document.createElement('div'); 
