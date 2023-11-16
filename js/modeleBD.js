@@ -303,14 +303,24 @@ function displayResult(album) {
 	// Utilise l'id de la série pour obtenir le nom de la série
 	let nomFic = series.get(album.idSerie).nom + "-" + album.numero + "-" + album.titre;
 
-	// Crée l'image de la card
-	const image = document.createElement('img');
-	image.classList.add('card-img-top');
-	image.src = "albums/" + nomFic + ".jpg"; // Ajoute le nom du fichier et l'extension de l'image
-	image.alt = 'Card image cap';
+	// Définir le chemin vers l'image par défaut
+    const srcImg = "images/noComicsMini.jpeg";
 
-	// Ajoute l'image à la card
-	card.appendChild(image);
+    // Crée l'image de la card
+    const image = document.createElement('img');
+    image.classList.add('card-img-top');
+    image.src = "albums/" + nomFic + ".jpg"; // Ajoute le nom du fichier et l'extension de l'image
+    image.alt = 'Card image cap';
+
+    // Gestionnaire d'événements pour l'erreur de chargement de l'image
+    image.onerror = function () {
+        // En cas d'erreur, charge l'image par défaut
+        image.src = srcImg;
+    };
+
+    // Ajoute l'image à la card
+    card.appendChild(image);
+
 
 	// Crée le corps de la card
 	const cardBody = document.createElement('div');
@@ -335,6 +345,8 @@ function displayResult(album) {
 
 	// Ajoute la card à la zone de résultats
 	document.getElementById('results').appendChild(card);
+
+	
 }
 
 
