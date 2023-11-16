@@ -23,6 +23,9 @@ fieldset {
   /* requis pour composer de manière appropriée les éléments
      de formulaire sur les navigateurs fondés sur WebKit */
   -webkit-appearance: none;
+  /* RAJOUT DE LA PROPRIETE APPERANCE */
+  appearance: none; /* Ajout de la propriété standard pour la compatibilité */
+
 
   width: 100%;
   border: 1px solid #333;
