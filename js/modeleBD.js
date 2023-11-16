@@ -32,11 +32,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		const albumDetails = getAlbumDetails(albumId);
 		if (!albumDetails) {
-			// Si les détails ne sont pas disponibles, affiche les images par défaut
+			// Si les détails sont disponibles, affiche les détails et les images correspondantes
 			clearAlbumDetails();
 			afficheAlbums(imgAlbumMini, imgAlbum, srcAlbumMini + 'defaultMini.jpeg', srcAlbum + 'default.jpeg');
 		} else {
-			// Si les détails sont disponibles, affiche les détails et les images correspondantes
+			// Si les détails ne sont pas disponibles, affiche les images par défaut
+
 			const cheminImageMiniature = srcAlbumMini + albumDetails.imageMiniature;
 			const cheminImageNormale = srcAlbum + albumDetails.imageNormale;
 
@@ -44,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			afficheAlbums(imgAlbumMini, imgAlbum, cheminImageMiniature, cheminImageNormale);
 		}
 	}
-
 
 	// Fonction pour afficher les détails de l'album dans les éléments de l'interface utilisateur
 	function displayAlbumDetails(albumDetails) {
@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		setTimeout(() => {
 			element.classList.remove('transition-effect');
 		}, 1000);
+
 	}
 
 	function getAlbum(num) {
@@ -140,11 +141,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // AJOUTER OU RETIRER UN ALBUM DU PANIER
+
+// Sélection des éléments du DOM pour le panier
+const cartItems = document.getElementById('cartItems');
+const cartTotal = document.getElementById('cartTotal');
+
 document.addEventListener("DOMContentLoaded", function () {
-	// Fonction pour ajouter un album au panier avec son prix
+	// Fonction pour AJOUTER un album au panier avec son prix
 	function addToCart(albumName, albumPrice) {
-		const cartItems = document.getElementById('cartItems');
-		const cartTotal = document.getElementById('cartTotal');
+
 
 		// Créer un nouvel élément li pour l'album ajouté
 		const newItem = document.createElement('li');
@@ -153,34 +158,28 @@ document.addEventListener("DOMContentLoaded", function () {
 		// Ajouter l'album à la liste du panier
 		cartItems.appendChild(newItem);
 
-		// Mettre à jour le total du panier avec le prix de l'album
-		let currentTotal = parseFloat(cartTotal.textContent) || 0; // Utiliser parseFloat pour gérer les prix décimaux
+		// Mise à jour du total du panier avec le prix de l'article
+		let currentTotal = parseFloat(cartTotal.textContent) || 0; // Gestion des prix décimaux
 		currentTotal += albumPrice;
-		cartTotal.textContent = currentTotal.toFixed(2); // Mettre à jour le total avec le prix de l'album (arrondi à 2 décimales)
-
-		// Afficher un message de confirmation (vous pouvez personnaliser cela)
-		alert(`L'album "${albumName}" a été ajouté au panier pour ${albumPrice}€.`);
+		cartTotal.textContent = currentTotal.toFixed(2); // Mise à jour du total avec le prix de l'article (arrondi à 2 décimales)
 	}
 
-	// Fonction pour retirer un album du panier avec son prix
-	function removeFromCart(albumName, albumPrice) {
-		const cartItems = document.getElementById('cartItems');
-		const cartTotal = document.getElementById('cartTotal');
+	// Fonction pour RETIRER un article du panier avec son prix
+	function removeFromCart(articleName, articlePrice) {
 		const items = cartItems.getElementsByTagName('li');
 
-		// Parcourir les éléments du panier pour trouver et retirer l'album correspondant
+		// Parcours des éléments du panier pour trouver et retirer l'article correspondant
 		for (let i = 0; i < items.length; i++) {
 			const item = items[i];
-			if (item.textContent.includes(albumName)) {
+			if (item.textContent.includes(articleName)) {
 				const itemPrice = parseFloat(item.textContent.match(/Prix : (\d+\.\d+)/)[1]);
-				cartItems.removeChild(item); // Retirer l'élément correspondant de la liste du panier
-				// Mettre à jour le total du panier en retirant le prix de l'album retiré
+				cartItems.removeChild(item); // Retrait de l'article correspondant de la liste du panier
+
+				// Mise à jour du total du panier en retirant le prix de l'article retiré
 				let currentTotal = parseFloat(cartTotal.textContent) || 0;
 				currentTotal -= itemPrice;
 				cartTotal.textContent = currentTotal.toFixed(2);
-				// Afficher un message de confirmation (vous pouvez personnaliser cela)
-				alert(`L'album "${albumName}" a été retiré du panier.`);
-				return; // Arrêter la boucle après avoir retiré l'album
+				return; // Arrêt de la boucle après avoir retiré l'article
 			}
 		}
 		// Si l'album n'est pas trouvé dans le panier
@@ -203,28 +202,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			// Appel de la fonction d'ajout au panier avec le nom et le prix de l'album
 			if (albumPrice > 0) {
 				addToCart(albumName, albumPrice);
-			} else {
-				alert('Prix invalide pour cet album.');
-			}
-		});
-	});
-
-	// Sélection de tous les boutons "Retirer du panier"
-	const removeFromCartButtons = document.querySelectorAll('.removeFromCartButton');
-
-	// Ajout d'un écouteur d'événements pour chaque bouton "Retirer du panier"
-	removeFromCartButtons.forEach(button => {
-		button.addEventListener('click', function (event) {
-			// Récupération de la carte parente du bouton cliqué
-			const card = event.target.closest('.card');
-
-			// Récupération du nom et du prix de l'album à partir de la carte
-			const albumName = card.querySelector('#titre').value;
-			const albumPrice = parseFloat(card.querySelector('#prix').value) || 0;
-
-			// Appel de la fonction de retrait du panier avec le nom et le prix de l'album
-			if (albumPrice > 0) {
-				removeFromCart(albumName, albumPrice);
 			} else {
 				alert('Prix invalide pour cet album.');
 			}
@@ -298,62 +275,62 @@ function searchBySerie(searchInput) {
 
 // AFFICHER LE RESULTAT DE LA RECHERCHE DANS UNE CARD
 function displayResult(album) {
-    // Crée une card pour chaque résultat
-    const card = document.createElement('div');
-    card.classList.add('col-sm-6', 'col-md-4', 'col-lg-3', 'mb-4');
+	// Crée une card pour chaque résultat
+	const card = document.createElement('div');
+	card.classList.add('col-sm-6', 'col-md-4', 'col-lg-3', 'mb-4');
 
-    // Utilise l'id de la série pour obtenir le nom de la série
-    let nomFic = series.get(album.idSerie).nom + "-" + album.numero + "-" + album.titre;
+	// Utilise l'id de la série pour obtenir le nom de la série
+	let nomFic = series.get(album.idSerie).nom + "-" + album.numero + "-" + album.titre;
 
-    // Définir le chemin vers l'image par défaut
-    const srcImg = "images/noComicsMini.jpeg";
+	// Définir le chemin vers l'image par défaut
+	const srcImg = "images/noComicsMini.jpeg";
 
-    // Crée l'image de la card
-    const image = document.createElement('img');
-    image.classList.add('card-img-top');
-    image.src = "albums/" + nomFic + ".jpg"; // Ajoute le nom du fichier et l'extension de l'image
-    image.alt = 'Card image cap';
+	// Crée l'image de la card
+	const image = document.createElement('img');
+	image.classList.add('card-img-top');
+	image.src = "albums/" + nomFic + ".jpg"; // Ajoute le nom du fichier et l'extension de l'image
+	image.alt = 'Card image cap';
 
-    // Gestionnaire d'événements pour l'erreur de chargement de l'image
-    image.onerror = function () {
-        // En cas d'erreur, charge l'image par défaut
-        image.src = srcImg;
-    };
+	// Gestionnaire d'événements pour l'erreur de chargement de l'image
+	image.onerror = function () {
+		// En cas d'erreur, charge l'image par défaut
+		image.src = srcImg;
+	};
 
-    // Crée le corps de la card
-    const cardBody = document.createElement('div');
-    cardBody.classList.add('card-body');
+	// Crée le corps de la card
+	const cardBody = document.createElement('div');
+	cardBody.classList.add('card-body');
 
-    // Crée le titre de la card
-    const title = document.createElement('h5');
-    title.classList.add('card-title');
-    title.textContent = album.titre;
+	// Crée le titre de la card
+	const title = document.createElement('h5');
+	title.classList.add('card-title');
+	title.textContent = album.titre;
 
-    // Crée les détails de la card
-    const details = document.createElement('p');
-    details.classList.add('card-text');
-    details.textContent = `N°${album.numero}, Série: ${series.get(album.idSerie).nom}, Auteur: ${auteurs.get(album.idAuteur).nom}`;
+	// Crée les détails de la card
+	const details = document.createElement('p');
+	details.classList.add('card-text');
+	details.textContent = `N°${album.numero}, Série: ${series.get(album.idSerie).nom}, Auteur: ${auteurs.get(album.idAuteur).nom}`;
 
-    // Crée les boutons "Ajouter au panier" et "Retirer du panier"
-    const addToCartButton = document.createElement('a');
-    addToCartButton.classList.add('btn', 'addToCartButton');
-    addToCartButton.textContent = 'Ajouter au panier';
+	// Crée les boutons "Ajouter au panier" et "Retirer du panier"
+	const addToCartButton = document.createElement('a');
+	addToCartButton.classList.add('btn', 'addToCartButton');
+	addToCartButton.textContent = 'Ajouter au panier';
 
-    const removeFromCartButton = document.createElement('a');
-    removeFromCartButton.classList.add('btn', 'removeFromCartButton');
-    removeFromCartButton.textContent = 'Retirer du panier';
+	const removeFromCartButton = document.createElement('a');
+	removeFromCartButton.classList.add('btn', 'removeFromCartButton');
+	removeFromCartButton.textContent = 'Retirer du panier';
 
-    // Ajoute les éléments à la card
-    cardBody.appendChild(title);
-    cardBody.appendChild(details);
-    cardBody.appendChild(addToCartButton);
-    cardBody.appendChild(removeFromCartButton);
+	// Ajoute les éléments à la card
+	cardBody.appendChild(title);
+	cardBody.appendChild(details);
+	cardBody.appendChild(addToCartButton);
+	cardBody.appendChild(removeFromCartButton);
 
-    card.appendChild(image);
-    card.appendChild(cardBody);
+	card.appendChild(image);
+	card.appendChild(cardBody);
 
-    // Ajoute la card à la zone de résultats
-    document.getElementById('results').appendChild(card);
+	// Ajoute la card à la zone de résultats
+	document.getElementById('results').appendChild(card);
 }
 
 
@@ -407,7 +384,10 @@ async function displayAlbums(viewType) {
 		displayAlbumsAsCards(albumsArray, container);
 	}
 }
+
 function displayAlbumsAsTable(albumsData, container) {
+
+	
 	const tableContainer = document.createElement('div'); // Crée une div conteneur
 	tableContainer.classList.add('album-table-container'); // Ajoute la classe pour le style
 
@@ -424,6 +404,8 @@ function displayAlbumsAsTable(albumsData, container) {
 		<th>Titre</th>
 		<th>Auteur</th>
 		<th>Prix</th>
+		<th>Ajouter au panier</th>
+        <th>Retirer du panier</th>
 	`;
 
 	tableHeader.appendChild(headerRow); // Ajoute la ligne d'en-tête à l'en-tête du tableau
@@ -435,83 +417,71 @@ function displayAlbumsAsTable(albumsData, container) {
 	albumsData.forEach(album => {
 		const row = document.createElement('tr'); // Crée une ligne
 
-		// Remplit la ligne avec les données de l'album
+		// Remplissage de la ligne avec les données de l'album
 		row.innerHTML = `
-		<img src="albums/" + serie.nom + '-' + album.numero + '-' + album.titre >
-		<td>${album.idSerie}</td>
-			<td>${album.numero}</td>
-			<td>${album.titre}</td>
-			<td>${album.idAuteur}</td>
-			<td>${album.prix}</td>
-		`;
-		tableBody.appendChild(row); // Ajoute la ligne au corps du tableau
+		 <img src="albumsMini/${album.idSerie}-${album.numero}-${album.titre}.jpg" alt="Image">
+		 <td>${album.idSerie}</td>
+		 <td>${album.numero}</td>
+		 <td>${album.titre}</td>
+		 <td>${album.idAuteur}</td>
+		 <td>${album.prix}€</td>
+		
+	 `;
+
+	   // Crée une cellule pour chaque bouton
+	   const addToCartCell = document.createElement('td');
+	   const addToCartButton = document.createElement('button');
+	   addToCartButton.classList.add('btn', 'addToCartButton');
+	   addToCartButton.textContent = 'Ajouter au panier';
+	   addToCartCell.appendChild(addToCartButton);
+   
+	   const removeFromCartCell = document.createElement('td');
+	   const removeFromCartButton = document.createElement('button');
+	   removeFromCartButton.classList.add('btn', 'removeFromCartButton');
+	   removeFromCartButton.textContent = 'Retirer du panier';
+	   removeFromCartCell.appendChild(removeFromCartButton);
+   
+	   // Ajoute les cellules de boutons à la ligne du tableau
+	   row.appendChild(addToCartCell);
+	   row.appendChild(removeFromCartCell);
+   
+   
+	   // Ajout d'événements click pour les boutons "Ajouter au panier" et "Retirer du panier"
+	   addToCartButton.addEventListener('click', function () {
+		   addToCart(album.titre, album.prix);
+	   });
+   
+	   removeFromCartButton.addEventListener('click', function () {
+		   removeFromCart(album.titre, album.prix);
+	   });
+		tableBody.appendChild(row); // Ajout de la ligne au corps du tableau
 	});
 
-	table.appendChild(tableBody); // Ajoute le corps au tableau
-	tableContainer.appendChild(table); // Ajoute le tableau à la div conteneur
-	container.appendChild(tableContainer); // Ajoute la div conteneur au conteneur principal
+	table.appendChild(tableBody); // Ajout du corps au tableau
+	tableContainer.appendChild(table); // Ajout du tableau à la div conteneur
+	container.appendChild(tableContainer); // Ajout de la div conteneur au conteneur principal
 }
-function displayAlbumsAsTable(albumsData, container) {
-	const table = document.createElement('table');
-	table.classList.add('album-table');
 
-	const tableHeader = document.createElement('thead');
-	const headerRow = document.createElement('tr');
+const tableBody = document.createElement('tbody');
 
-	headerRow.innerHTML = `
-		<th>Image</th>
-        <th>Série</th>
-        <th>Numéro</th>
-        <th>Titre</th>
-        <th>Auteur</th>
-        <th>Prix</th>
-		<th>Ajouter au panier</th>
-        <th>Retirer du panier</th>
-    `;
-
-	tableHeader.appendChild(headerRow);
-	table.appendChild(tableHeader);
-
-	const tableBody = document.createElement('tbody');
-
-	albumsData.forEach(album => {
-		const row = document.createElement('tr');
-
-		row.innerHTML = `
-			<img src="albums/" + serie.nom + '-' + album.numero + '-' + album.titre >
-			<td>${album.idSerie}</td>
-            <td>${album.numero}</td>
-            <td>${album.titre}</td>
-            <td>${album.idAuteur}</td>
-            <td>${album.prix}€</td>
-			<td><button class="btn addToCartButton">Ajouter au panier</button></td>
-            <td><button class=" btn removeFromCartButton">Retirer du panier</button></td>
-        `;
-		tableBody.appendChild(row);
-	});
-
-	table.appendChild(tableBody);
-	container.appendChild(table);
-}
 
 function displayAlbumsAsCards(albumsData, container) {
-	const cardContainer = document.createElement('div'); 
+	const cardContainer = document.createElement('div');
 
 	albumsData.forEach(album => {
 		const cardHTML = `
-            <div class="col-6 mb-4">
-                <div class="card">
-                    <img src="albums/${album.idSerie}-${album.numero}-${album.titre}.jpg" class="card-img-top" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">${album.titre}</h5>
-                        <p class="card-text">N°${album.numero}, Série: ${album.idSerie}, Auteur: ${album.idAuteur}</p>
-						<button class="btn addToCartButton">Ajouter au panier</button>
-                    	<button class="btn removeFromCartButton">Retirer du panier</button>
-                </div>
-                    </div>
-                </div>
-            </div>
+		<div class="card">
+		<img src="albumsMini/${album.idSerie}-${album.numero}-${album.titre}.jpg" class="card-img-top" alt="Image">
+		<div class="card-body">
+			<h5 class="card-title">${album.titre}</h5>
+			<p class="card-text">N°${album.numero}, Série: ${album.idSerie}, Auteur: ${album.idAuteur}</p>
+			<button class="btn addToCartButton">Ajouter au panier</button>
+			<button class="btn removeFromCartButton">Retirer du panier</button>
+		</div>
+	</div>
         `;
+
+		
 		cardContainer.innerHTML += cardHTML;
 	});
 
