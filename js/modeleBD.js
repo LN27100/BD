@@ -1,10 +1,9 @@
 jQuery(document).ready(function ($) {
-	const srcImg = "images/"; // emplacement des images de l'appli
-	const albumDefaultMini = srcImg + "noComicsMini.jpeg";
-	const albumDefault = srcImg + "noComics.jpeg";
-	const srcAlbumMini = "albumsMini/"; // emplacement des images des albums en petit
-	const srcAlbum = "albums/"; // emplacement des images des albums en grand
-
+    const srcImg = "images/"; // emplacement des images de l'appli
+    const albumDefaultMini = srcImg + "noComicsMini.jpeg";
+    const albumDefault = srcImg + "noComics.jpeg";
+    const srcAlbumMini = "albumsMini/"; // emplacement des images des albums en petit
+    const srcAlbum = "albums/"; // emplacement des images des albums en grand
 
 
 	// Affichage des BD
@@ -117,6 +116,54 @@ jQuery(document).ready(function ($) {
 });
 
 
+// AJOUTER OU RETIRER UN ALBUM DU PANIER
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Fonction pour ajouter un album au panier avec son prix
+    function addToCart(albumName, albumPrice) {
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+
+        // Créer un nouvel élément li pour l'album ajouté
+        const newItem = document.createElement('li');
+        newItem.textContent = `${albumName} - Prix : ${albumPrice}$`; // Afficher le nom de l'album et son prix
+
+        // Ajouter l'album à la liste du panier
+        cartItems.appendChild(newItem);
+
+        // Mettre à jour le total du panier avec le prix de l'album
+        let currentTotal = parseFloat(cartTotal.textContent) || 0; // Utiliser parseFloat pour gérer les prix décimaux
+
+        currentTotal += albumPrice;
+        cartTotal.textContent = currentTotal.toFixed(2); // Mettre à jour le total avec le prix de l'album (arrondi à 2 décimales)
+
+        // Afficher un message de confirmation (vous pouvez personnaliser cela)
+        alert(`L'album "${albumName}" a été ajouté au panier pour ${albumPrice}$.`);
+    }
+
+    // Sélection de tous les boutons avec la classe "addToCartButton"
+    const addToCartButtons = document.querySelectorAll('.addToCartButton');
+
+    // Ajout d'un écouteur d'événements pour chaque bouton "Ajouter au panier"
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            // Récupération de la carte parente du bouton cliqué
+            const card = event.target.closest('.card');
+
+            // Récupération du nom et du prix de l'album à partir de la carte
+			const albumName = card.querySelector('#titre').value;
+            const albumPrice = parseFloat(card.querySelector('#prix').value) || 0;
+
+            // Appel de la fonction d'ajout au panier avec le nom et le prix de l'album
+            if (albumPrice > 0) {
+                addToCart(albumName, albumPrice);
+            } else {
+                alert('Prix invalide pour cet album.');
+            }
+        });
+    });
+});
+
 
 //BARRE DE RECHERCHE AVEC FILTRES
 
@@ -225,125 +272,4 @@ function displayResult(album) {
 }
 
 
-
-// AJOUTER OU RETIRER UN ALBUM DU PANIER
-// Attend que le document soit chargé avant d'exécuter le code jQuery
-// jQuery(document).ready(function ($) {
-
-//     // Déclaration des chemins des images par défaut
-//     const srcImg = "images/";
-//     const albumDefaultMini = srcImg + "noComicsMini.jpeg";
-//     const albumDefault = srcImg + "noComics.jpeg";
-
-//     const srcAlbumMini = "albumsMini/";
-//     const srcAlbum = "albums/";
-
-//     // Sélection des boutons "Ajouter au panier" et "Retirer du panier"
-//     const addToCartButton = $(".btn:contains('Ajouter au panier')");
-//     const remFromCartButton = $(".btn:contains('Retirer du panier')");
-
-//     // Ajout des gestionnaires d'événements pour les boutons
-//     addToCartButton.click(function () {
-//         addToCart();
-//     });
-
-//     remFromCartButton.click(function () {
-//         remFromCart();
-//     });
-
-//     // Sélection des éléments HTML à mettre à jour
-//     const txtSerie = $("#serie");
-//     const txtNumero = $("#numero");
-//     const txtTitre = $("#titre");
-//     const txtAuteur = $("#auteur");
-//     const txtPrix = $("#prix");
-//     const imgAlbum = $("#album");
-//     const imgAlbumMini = $("#albumMini");
-//     const idInput = $("#id");
-
-//     // Gestionnaire d'erreur pour les images
-//     imgAlbum.on("error", function () {
-//         handleImageError(this);
-//     });
-
-//     imgAlbumMini.on("error", function () {
-//         handleImageError(this);
-//     });
-
-//     // Gestionnaire de changement d'ID
-//     idInput.on("change", function () {
-//         getAlbum(this);
-//     });
-
-//     // Fonction pour récupérer les détails de l'album par son ID
-//     function getAlbum(input) {
-//         const album = albums.get(input.val());
-
-//         if (album === undefined) {
-//             clearAlbumDetails();
-//             displayAlbums(imgAlbumMini, imgAlbum, albumDefaultMini, albumDefault);
-//         } else {
-//             const serie = series.get(album.idSerie);
-//             const auteur = auteurs.get(album.idAuteur);
-
-//             txtSerie.val(serie.nom);
-//             txtNumero.val(album.numero);
-//             txtTitre.val(album.titre);
-//             txtAuteur.val(auteur.nom);
-//             txtPrix.val(album.prix);
-
-//             const nomFic = serie.nom + "-" + album.numero + "-" + album.titre;
-//             const sanitizedNomFic = nomFic.replace(/'|!|\?|\.|"|:|\$/g, "");
-
-//             displayAlbums(
-//                 imgAlbumMini,
-//                 imgAlbum,
-//                 srcAlbumMini + NomFic + ".jpg",
-//                 srcAlbum + NomFic + ".jpg"
-//             );
-//         }
-//     }
-
-//     // Fonction pour effacer les détails de l'album
-//     function clearAlbumDetails() {
-//         txtSerie.val("");
-//         txtNumero.val("");
-//         txtTitre.val("");
-//         txtAuteur.val("");
-//         txtPrix.val(0);
-//     }
-
-//     // Fonction pour afficher les images de l'album
-//     function displayAlbums($albumMini, $album, nomFicMini, nomFic) {
-//         $album.stop(true, true).clearQueue().fadeOut(100, function () {
-//             $album.attr('src', nomFic);
-//             $albumMini.stop(true, true).clearQueue().fadeOut(150, function () {
-//                 $albumMini.attr('src', nomFicMini);
-//                 $albumMini.slideDown(200, function () {
-//                     $album.slideDown(200);
-//                 });
-//             })
-//         });
-//     }
-
-//     // Gestionnaire d'erreur pour les images
-//     function handleImageError(element) {
-//         const defaultImage = element.id === "albumMini" ? albumDefaultMini : albumDefault;
-//         element.src = defaultImage;
-//     }
-
-//     // Fonction pour ajouter un album au panier
-//     function addToCart() {
-//         const id = idInput.val();
-//         // Ajouter la logique réelle pour ajouter au panier avec l'ID de l'album
-//         // (Remplacez cette ligne par la logique réelle que vous souhaitez exécuter)
-//     }
-
-//     // Fonction pour retirer un album du panier
-//     function remFromCart() {
-//         const id = idInput.val();
-//         // Ajouter la logique réelle pour retirer du panier avec l'ID de l'album
-//         // (Remplacez cette ligne par la logique réelle que vous souhaitez exécuter)
-//     }
-// });
 

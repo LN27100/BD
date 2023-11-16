@@ -115,6 +115,16 @@
   </div>
   <div class="container">
 
+    <!-- PANIER -->
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Panier d'achat</h2>
+        <ul id="cartItems"></ul>
+        <p>Total : $<span id="cartTotal">0.00</span></p>
+      </div>
+    </div>
+  </div>
+
     <!-- Résultats de la recherche -->
     <div id="results" class="row"></div>    <br>
     <br>
@@ -149,7 +159,7 @@
               <label for="prix">Prix :</label>
               <input type="number" id="prix" readonly>
             </p>
-            <a href="confirmCommande.html" class="btn ">Ajouter au panier</a>
+            <a href="#" class="btn addToCartButton">Ajouter au panier</a>
             <a href="#" class="btn ">Retirer du panier</a>
           </div>
         </div>
