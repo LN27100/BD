@@ -250,16 +250,16 @@ justify-content: center;
 
 
 
-#results > div > div {
+#result > div > div {
   margin-top: 1rem;
   background: linear-gradient(0deg, rgba(198,177,177,1) 23%, rgba(220,202,202,0.6839110644257703) 83%);
 }
 
-#results > div > div > a.btn.addToCartButton {
+#result > div > div > a.btn.addToCartButton {
   margin: 0.5rem;
 }
 
-#results > div > div > a.btn.removeFromCartButton {
+#result > div > div > a.btn.removeFromCartButton {
   margin: 0.5rem;
 }
 
