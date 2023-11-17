@@ -142,6 +142,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // AJOUTER OU RETIRER UN ALBUM DU PANIER
 
+// AJOUTER OU RETIRER UN ALBUM DU PANIER
+
 // Sélection des éléments du DOM pour le panier
 const cartItems = document.getElementById('cartItems');
 const cartTotal = document.getElementById('cartTotal');
@@ -199,6 +201,7 @@ function removeFromCart(articleName, articlePrice) {
 		});
 	});
 });
+
 
 //BARRE DE RECHERCHE AVEC FILTRES
 

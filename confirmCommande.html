@@ -8,7 +8,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
   <link rel="stylesheet" href="css/style.css">
@@ -19,7 +21,7 @@
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light ">
-    <a class="navbar-brand" href="BD.html"><img class= "logo" src="images/meilleur.png" alt="logo"></a>
+    <a class="navbar-brand" href="BD.html"><img class="logo" src="images/meilleur.png" alt="logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -39,7 +41,7 @@
           </ul>
         </li>
 
-        
+
         <!-- Panier d'achat -->
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
@@ -96,23 +98,20 @@
     </div>
     <div class="offcanvas-body">
       <div>
-        <ul>
-          <li>
-            <p>Album dans panier</p>
-          </li>
-          <li>
-            <p>Album dans panier</p>
-          </li>
-          <li>
-            <p>Album dans panier</p>
-          </li>
-        </ul>
-        <p>Total : </p>
-        <a href="confirmCommande.html" target="_blank"><button class="btn2">commander</button></a>
+        <!-- PANIER -->
+        <div class="row">
+          <div class="col-md-6">
+            <ul id="cartItems"></ul>
+            <p>Total : €<span id="cartTotal">0.00</span></p>
+          </div>
+        </div>
       </div>
-
+      <a href="confirmCommande.html" target="_blank"><button class="btn2">commander</button></a>
     </div>
+
   </div>
+  </div>
+
   <div class="container">
 
     <!-- Résultats de la recherche -->
@@ -141,10 +140,23 @@
       </div>
   </div>
           
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <footer class="d-flex flex-wrap py-3 my-3 border-top">
+    <div class="col-md-4 d-flex">
+      <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+        <svg class="bi" width="30" height="24">
+          <use xlink:href="#bootstrap"></use>
+        </svg>
+      </a>
+      <span>© 2023 LN, DWWM Afpa</span>
+    </div>
+
+    <ul class="nav d-flex">
+      <li class="ms-3"><a class="text-muted"><i class="fab fa-twitter"></i></a></li>
+      <li class="ms-3"><a class="text-muted"><i class="fab fa-instagram"></i></a></li>
+      <li class="ms-3"><a class="text-muted"><i class="fab fa-facebook"></i></a></li>
+    </ul>
+  </footer>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
     integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
     crossorigin="anonymous"></script>
