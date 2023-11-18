@@ -436,8 +436,29 @@ function displayAlbumsAsTableWithPagination(albumsData, container) {
         tableContainer.appendChild(table);
         container.innerHTML = '';
         container.appendChild(tableContainer);
-    }
 
+
+            // Ajout des contrôles de pagination
+            const pagination = document.createElement('div');
+            pagination.classList.add('pagination');
+    
+            const totalPages = Math.ceil(albumsData.length / itemsPerPage);
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.textContent = i;
+                if (i === currentPage) {
+                    pageButton.classList.add('active');
+                }
+                pageButton.addEventListener('click', function () {
+                    changeTablePage(i);
+                });
+                pagination.appendChild(pageButton);
+            }
+    
+            container.innerHTML = '';
+            container.appendChild(tableContainer);
+            container.appendChild(pagination);
+        }
     function changeTablePage(page) {
         currentPage = page;
         displayTablePage(currentPage);
@@ -446,6 +467,9 @@ function displayAlbumsAsTableWithPagination(albumsData, container) {
     displayTablePage(currentPage);
 
 }
+
+
+// Fonction pour afficher les albums sous forme de cards avec pagination
 
 function displayAlbumsAsCardsWithPagination(albumsData, container) {
     const itemsPerPage = 50; // Nombre d'éléments par page
