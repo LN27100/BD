@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/meteo.css">
+    <title>Météo GlaGla</title>
+</head>
+<body>
+    
+        <section>
+          <div class="container">
+            <div class="background-img">
+              <div class="box">
+                <span></span>
+                <span></span>
+                <div class="content">
+                  <h1>Prévisions météorologiques sur 5 jours </h1>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </section>
+          
+  
+
+
+    <h2>Ville de <span id="city">Val-de-Reuil</span></h2>
+
+    <div class="search-container">
+        <input type="text" id="new-city" placeholder="Nouvelle ville">
+        <button id="search-button">Rechercher</button>
+    </div>
+
+    <div id="weather-info">
+       <!-- Ici les infos des weather-cards -->
+    </div>
+
+    
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">CGU</a>
+            <a href="#">Mentions Légales</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Site LN. Tous droits réservés.
+        </div>
+    </footer>
+
+<script src="js/meteo.js"></script>
+</body>
+</html>
