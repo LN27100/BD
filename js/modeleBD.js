@@ -216,11 +216,11 @@ function init() {
 
         // Ajout des écouteurs d'événements pour les boutons d'ajout et de retrait du panier
         addToCartButton.addEventListener('click', function () {
-            addToCart(album.titre, album.prix); // Ajoute l'album au panier avec son nom et son prix
+            addToCart(album.titre, album.prix); // Appel à la fonction d'ajout au panier
         });
 
         removeFromCartButton.addEventListener('click', function () {
-            removeFromCart(album.titre, album.prix); // Retire l'album du panier avec son nom et son prix
+            removeFromCart(album.titre, album.prix); // Appel à la fonction de retrait du panier
         });
 
         // Ajoute les éléments à la card
@@ -355,8 +355,8 @@ function init() {
                 image.onerror = function () {
                     image.src = defaultImage; // Utilisation de l'image par défaut pour l'album
                 };
-
-                image.src = albumImagePath; // Charge l'image de l'album
+                
+                image.src = albumImagePath; // Tentative de chargement de l'image d'album
                 imageLink.appendChild(image);
                 imageCell.appendChild(imageLink);
                 row.appendChild(imageCell);
