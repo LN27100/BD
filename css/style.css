@@ -1,9 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Marhey&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+}
 
 body {
   font: 1rem sans-serif;
   padding: 0;
   margin: 0;
+  place-items: center;
+
 }
 
 form {
@@ -26,7 +36,8 @@ fieldset {
      de formulaire sur les navigateurs fondés sur WebKit */
   -webkit-appearance: none;
   /* RAJOUT DE LA PROPRIETE APPERANCE */
-  appearance: none; /* Ajout de la propriété standard pour la compatibilité */
+  appearance: none;
+  /* Ajout de la propriété standard pour la compatibilité */
 
 
   width: 100%;
@@ -97,11 +108,12 @@ body>nav {
   padding: 1rem;
 }
 
-#navbarSupportedContent > ul > li.nav-item.dropdown > ul {
+#navbarSupportedContent>ul>li.nav-item.dropdown>ul {
   background: linear-gradient(0deg, rgba(133, 125, 125, 1) 10%, rgba(189, 189, 189, 1) 55%);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   padding: 1rem;
 }
+
 .dropdown-item {
   color: white;
   font-family: 'Marhey';
@@ -165,34 +177,31 @@ h2 {
 
 /* SCROLLBAR CUSTOMISEE */
 
-::-webkit-scrollbar-track
-{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    background-color: #c6b1b1;
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #c6b1b1;
 }
 
-::-webkit-scrollbar
-{
-    width: 10px;
-    background-color: #857d7d;
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #857d7d;
 }
 
-::-webkit-scrollbar-thumb
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #857d7d;
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #857d7d;
 }
 
 /* FOOTER */
-body > footer > div > span {
+body>footer>div>span {
   font-family: 'Marhey';
 
   color: white;
 }
 
 footer {
-justify-content: center;
+  justify-content: center;
 }
 
 .fab {
@@ -221,12 +230,15 @@ justify-content: center;
 
 /* Effet de transition */
 .transition-effect {
-  transition: opacity 0.5s ease; /* Transition sur l'opacité pendant 0.5 seconde */
+  transition: opacity 0.5s ease;
+  /* Transition sur l'opacité pendant 0.5 seconde */
 }
 
 /* Opacité pour l'effet de transition */
-#albumMini.transition-effect, #album.transition-effect {
-  opacity: 0; /* L'image est invisible (opacité à 0) */
+#albumMini.transition-effect,
+#album.transition-effect {
+  opacity: 0;
+  /* L'image est invisible (opacité à 0) */
 }
 
 
@@ -235,31 +247,33 @@ justify-content: center;
   border-collapse: collapse;
 }
 
-.album-table th, .album-table td {
-  background: linear-gradient(0deg, rgba(90,88,88,1) 23%, rgba(90,88,88,1) 40%, rgba(135,131,132,1) 69%, rgba(151,147,148,1) 83%);
+.album-table th,
+.album-table td {
+  background: linear-gradient(0deg, rgba(90, 88, 88, 1) 23%, rgba(90, 88, 88, 1) 40%, rgba(135, 131, 132, 1) 69%, rgba(151, 147, 148, 1) 83%);
   color: white;
   font-family: 'Marhey';
   font-weight: lighter;
   border: 1px solid #000;
-  padding: 0.5rem 1rem 0.5rem 1rem  ;
+  padding: 0.5rem 1rem 0.5rem 1rem;
   text-align: left;
 }
-#albumTable > table > thead > tr {
+
+#albumTable>table>thead>tr {
   font-size: 1rem;
 }
 
 
 
-#result > div > div {
+#result>div>div {
   margin-top: 1rem;
-  background: linear-gradient(0deg, rgba(198,177,177,1) 23%, rgba(220,202,202,0.6839110644257703) 83%);
+  background: linear-gradient(0deg, rgba(198, 177, 177, 1) 23%, rgba(220, 202, 202, 0.6839110644257703) 83%);
 }
 
-#result > div > div > a.btn.addToCartButton {
+#result>div>div>a.btn.addToCartButton {
   margin: 0.5rem;
 }
 
-#result > div > div > a.btn.removeFromCartButton {
+#result>div>div>a.btn.removeFromCartButton {
   margin: 0.5rem;
 }
 
@@ -288,14 +302,14 @@ justify-content: center;
   background: linear-gradient(0deg, rgba(110, 109, 107, 0.7287289915966386) 20%, rgba(69, 69, 69, 0.6530987394957983) 45%);
 }
 
-#offcanvasExample > div.offcanvas-body > a > button {
+#offcanvasExample>div.offcanvas-body>a>button {
   border-radius: 5px;
   color: white;
   font-family: 'Marhey';
   background: linear-gradient(0deg, rgba(110, 109, 107, 0.7287289915966386) 20%, rgba(69, 69, 69, 0.6530987394957983) 45%);
 }
 
-#offcanvasExample > div.offcanvas-body > a > button:hover {
+#offcanvasExample>div.offcanvas-body>a>button:hover {
   color: white;
   text-align: center;
   font-size: 1.5rem;
@@ -305,7 +319,7 @@ justify-content: center;
 
 #offcanvasExample {
   font-family: 'Marhey';
-  background: linear-gradient(0deg, rgba(198,177,177,1) 23%, rgba(220,202,202,0.6839110644257703) 83%);
+  background: linear-gradient(0deg, rgba(198, 177, 177, 1) 23%, rgba(220, 202, 202, 0.6839110644257703) 83%);
 }
 
 #offcanvasExampleLabel {
@@ -315,16 +329,72 @@ justify-content: center;
 }
 
 
+
+/* CSS POUR LA PAGINATION */
+
+.pagination {
+  display: flex;
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+  justify-content: center;
+}
+.pagination li {
+  margin: 0 5px;
+  background: #ac8e8e;
+  border-radius: 3px;
+  box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, 0.288);
+}
+.pagination li a {
+  font-size: 18px;
+  text-decoration: none;
+  color: black;
+  height: 45px;
+  width: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.pagination li:hover{
+  background-color: #614c4c;
+}
+
+
+.pagination li:first-child a {
+  width: 70px;
+}
+.pagination li:last-child a {
+  width: 70px;
+}
+.pagination li.active {
+  background: #6E6C6C;
+  box-shadow: inset -3px -3px 7px #ffffff73,
+    inset 3px 3px 5px rgba(94, 104, 121, 0.288);
+}
+.pagination li.active a {
+  font-size: 17px;
+  color: #fff;
+}
+.pagination li:first-child {
+  margin-right: 15px;
+}
+.pagination li:last-child {
+  margin-left: 15px;
+}
+
 /* RESPONSIVE */
 @media screen and (max-width: 768px) {
   .navbar-brand {
-    margin: 1rem; 
-    font-size: 1.2rem; 
+    margin: 1rem;
+    font-size: 1.2rem;
   }
 
-  #navbarSupportedContent > ul > li.nav-item.dropdown > a {
-    margin: 1rem; 
-    font-size: 1rem; 
+  #navbarSupportedContent>ul>li.nav-item.dropdown>a {
+    margin: 1rem;
+    font-size: 1rem;
   }
 
   .navbar-nav {
@@ -336,75 +406,68 @@ justify-content: center;
   }
 
 
-  .navbar-toggler.collapsed + .navbar-nav {
+  .navbar-toggler.collapsed+.navbar-nav {
     display: block;
   }
 }
 
 @media screen and (max-width: 768px) {
   .navbar-brand {
-    margin: 1rem; 
-    font-size: 1.2rem; 
+    margin: 1rem;
+    font-size: 1.2rem;
   }
 
   .logo {
-    width: 8rem; 
+    width: 8rem;
   }
 }
 
 @media screen and (max-width: 768px) {
   form {
-    max-width: 100%; /* Utilisation de la largeur maximale disponible */
-    margin: 0; /* Réinitialisation de la marge pour occuper toute la largeur */
-    padding: 0; /* Réinitialisation du padding */
+    max-width: 100%;
+    /* Utilisation de la largeur maximale disponible */
+    margin: 0;
+    /* Réinitialisation de la marge pour occuper toute la largeur */
+    padding: 0;
+    /* Réinitialisation du padding */
   }
 
-  
+
   .navbar-brand {
-    margin: 0; 
-    display: none; /* Masquer le logo sur les petits écrans */
+    margin: 0;
+    display: none;
+    /* Masquer le logo sur les petits écrans */
   }
 
   #navbarSupportedContent>ul>li.nav-item.dropdown>a,
   #navbarSupportedContent>ul>li:nth-child(2)>a {
-    margin: 0; 
-    font-size: 1rem; 
+    margin: 0;
+    font-size: 1rem;
   }
-  
+
   .navbar {
-    margin-bottom: 5rem; 
+    margin-bottom: 5rem;
   }
 }
 
-/* CSS pour la pagination */
+@media screen and (max-width: 768px) {
+  .pagination {
+    flex-wrap: wrap;
+  }
 
-.pagination {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
-}
+  .pagination li {
+    margin: 5px 0;
+  }
 
-.pagination li {
-  margin: 0 5px;
-}
+  .pagination li a {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+  }
 
-.pagination li a {
-  color: #333;
-  text-decoration: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.pagination li.active a {
-  background-color: #007bff;
-  color: #fff;
-  border-color: #007bff;
-}
-
-.pagination li a:hover {
-  background-color: #007bff;
-  color: #fff;
-  border-color: #007bff;
+  .pagination li:first-child a,
+  .pagination li:last-child a {
+    width: auto;
+  }
 }
