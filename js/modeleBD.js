@@ -98,85 +98,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //MON CODE
 
-// AJOUTER OU RETIRER UN ALBUM DU PANIER
-
-// Sélection des éléments du DOM pour le panier
-const cartItems = document.getElementById('cartItems');
-const cartTotal = document.getElementById('cartTotal');
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Fonction pour AJOUTER un album au panier avec son prix
-    function addToCart(albumName, albumPrice) {
-        const newItem = document.createElement('li');
-        newItem.textContent = `${albumName} - Prix : ${albumPrice}€`;
-
-        cartItems.appendChild(newItem);
-
-        let currentTotal = parseFloat(cartTotal.textContent) || 0;
-        currentTotal += albumPrice;
-        cartTotal.textContent = currentTotal.toFixed(2);
-    }
-
-    // Fonction pour RETIRER un article du panier avec son prix
-    function removeFromCart(articleName, articlePrice) {
-        const items = cartItems.getElementsByTagName('li');
-
-        for (let i = 0; i < items.length; i++) {
-            const item = items[i];
-            if (item.textContent.includes(articleName)) {
-                const itemPrice = parseFloat(item.textContent.match(/Prix : (\d+\.\d+)/)[1]);
-                cartItems.removeChild(item);
-
-                let currentTotal = parseFloat(cartTotal.textContent) || 0;
-                currentTotal -= itemPrice;
-                cartTotal.textContent = currentTotal.toFixed(2);
-                return;
-            }
-        }
-        alert(`L'album "${articleName}" n'est pas dans le panier.`);
-    }
-
-
-    // Sélection de tous les boutons avec la classe "addToCartButton"
-    const addToCartButtons = document.querySelectorAll('.addToCartButton');
-
-    // Ajout d'un écouteur d'événements pour chaque bouton "Ajouter au panier"
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', function (event) {
-            // Récupération de la carte parente du bouton cliqué
-            const card = event.target.closest('.card');
-
-            // Récupération de l'élément correspondant au nom de l'album
-            const albumNameElement = card.querySelector('#titre');
-
-            // Vérification si l'élément existe avant d'accéder à sa valeur
-            if (albumNameElement) {
-                const albumName = albumNameElement.value;
-                console.log(albumName);
-
-                // Modification pour vérifier l'existence de l'élément #prix
-                const prixElement = card.querySelector('#prix');
-                if (prixElement) {
-                    const albumPrice = parseFloat(prixElement.value) || 0;
-
-                    // Appel de la fonction d'ajout au panier avec le nom et le prix de l'album
-                    if (albumPrice > 0) {
-                        addToCart(albumName, albumPrice);
-                    } else {
-                        alert('Prix invalide pour cet album.');
-                    }
-                } else {
-                    console.error('L\'élément #prix est introuvable.');
-                    // Gérer cette situation, comme afficher un message d'erreur ou prendre une autre action nécessaire.
-                }
-            } else {
-                console.error('L\'élément #titre est introuvable.');
-            }
-        });
-    });
-
-});
-
 
 // BARRE DE RECHERCHE AVEC FILTRES
 
@@ -623,4 +544,45 @@ if (detailsParam) {
 
     // Affichage des détails dans la page HTML
     document.body.appendChild(detailsContainer);
+}
+
+
+// AJOUTER OU RETIRER UN ALBUM DU PANIER
+let cartItems = []; // Tableau pour stocker les éléments du panier
+
+// Fonction pour ajouter un album au panier
+function addToCart(titre, prix) {
+    const albumToAdd = { titre: titre, prix: prix };
+    cartItems.push(albumToAdd);
+    updateCartDisplay(); // Mettre à jour l'affichage du panier
+}
+
+// Fonction pour retirer un album du panier
+function removeFromCart(titre, prix) {
+    const index = cartItems.findIndex(item => item.titre === titre && item.prix === prix);
+    if (index !== -1) {
+        cartItems.splice(index, 1);
+        updateCartDisplay(); // Mettre à jour l'affichage du panier
+    }
+}
+
+// Fonction pour mettre à jour l'affichage du panier
+function updateCartDisplay() {
+    const cartItemsList = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+
+    // Réinitialiser la liste des éléments du panier et le total
+    cartItemsList.innerHTML = '';
+    let total = 0;
+
+    // Parcourir les éléments du panier et les ajouter à la liste
+    cartItems.forEach(item => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${item.titre} - €${item.prix}`;
+        cartItemsList.appendChild(listItem);
+        total += item.prix; // Ajouter le prix à total
+    });
+
+    // Mettre à jour le total affiché
+    cartTotal.textContent = total.toFixed(2); // Fixer le total à 2 décimales
 }
