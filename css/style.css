@@ -264,16 +264,23 @@ footer {
 
 
 
-#result>div>div {
-  margin-top: 1rem;
+#results>div {
+  padding: 1rem;
+  width: 18rem;
+  margin: 1rem;
+  border-radius: 5px;
   background: linear-gradient(0deg, rgba(198, 177, 177, 1) 23%, rgba(220, 202, 202, 0.6839110644257703) 83%);
 }
 
-#result>div>div>a.btn.addToCartButton {
+#results > div > img {
+  margin-bottom: 1rem;
+}
+
+#results > div > div > a.btn.addToCartButton {
   margin: 0.5rem;
 }
 
-#result>div>div>a.btn.removeFromCartButton {
+#results > div > div > a.btn.removeFromCartButton {
   margin: 0.5rem;
 }
 
@@ -339,12 +346,14 @@ footer {
   padding: 0;
   justify-content: center;
 }
+
 .pagination li {
   margin: 0 5px;
   background: #ac8e8e;
   border-radius: 3px;
   box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, 0.288);
 }
+
 .pagination li a {
   font-size: 18px;
   text-decoration: none;
@@ -358,7 +367,7 @@ footer {
   transition: all 0.3s ease;
 }
 
-.pagination li:hover{
+.pagination li:hover {
   background-color: #614c4c;
 }
 
@@ -366,21 +375,26 @@ footer {
 .pagination li:first-child a {
   width: 70px;
 }
+
 .pagination li:last-child a {
   width: 70px;
 }
+
 .pagination li.active {
   background: #6E6C6C;
   box-shadow: inset -3px -3px 7px #ffffff73,
     inset 3px 3px 5px rgba(94, 104, 121, 0.288);
 }
+
 .pagination li.active a {
   font-size: 17px;
   color: #fff;
 }
+
 .pagination li:first-child {
   margin-right: 15px;
 }
+
 .pagination li:last-child {
   margin-left: 15px;
 }
@@ -469,5 +483,17 @@ footer {
   .pagination li:first-child a,
   .pagination li:last-child a {
     width: auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #results>div {
+    width: calc(50% - 2rem); /* 2rem de marge pour deux colonnes sur les écrans plus petits */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #results>div {
+    width: calc(100% - 2rem); /* Pleine largeur pour les écrans très petits */
   }
 }
