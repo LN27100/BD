@@ -262,8 +262,6 @@ footer {
   font-size: 1rem;
 }
 
-
-
 #results>div {
   padding: 1rem;
   width: 18rem;
@@ -399,7 +397,14 @@ footer {
   margin-left: 15px;
 }
 
-/* Enveloppe lien site météo  */
+/* CSS ENVELOPPE LIEN SITE METEO  */
+
+body > main > div.letter-image > div.animated-mail > div.letter > div.meteo > a {
+  text-decoration: none;
+  color: grey;
+  font-size: 2rem;
+  font-family: 'Marhey';
+}
 
 .letter-image {
   margin-left: 3rem;
@@ -428,7 +433,7 @@ footer {
   height: 0;
   border-style: solid;
   border-width: 0 0 100px 200px;
-  border-color: transparent transparent #01A195 transparent;
+  border-color: transparent transparent #333 transparent;
   z-index: 2;
 }
 
@@ -445,8 +450,14 @@ footer {
   -moz-transition: transform .4s .4s, z-index .2s .4s;
   transform-origin: 50% 0%;
   transition: transform .4s .4s, z-index .2s .4s;
-  border-color: #50dfdb transparent transparent transparent;
+  border-color: #807e7e transparent transparent transparent;
   z-index: 2;
+}
+
+body > main > div.letter-image > div.animated-mail > div.left-fold {
+  color: white;
+  font-family: 'Marhey';
+
 }
 
 .back-fold {
@@ -454,7 +465,7 @@ footer {
   bottom: 0;
   width: 200px;
   height: 100px;
-  background: #01A195;
+  background: #333;
   z-index: 0;
 }
 
@@ -465,7 +476,7 @@ footer {
   height: 0;
   border-style: solid;
   border-width: 50px 0 50px 100px;
-  border-color: transparent transparent transparent #01A195;
+  border-color: transparent transparent transparent #333;
   z-index: 2;
 }
 
