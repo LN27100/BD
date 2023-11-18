@@ -1,143 +1,98 @@
 // SUPPRESSION DU JQUERY DE BASE POUR UTILISER DES FONTIONS FULL JS
+
 document.addEventListener('DOMContentLoaded', function () {
-	// Définition des chemins vers les images par défaut et les répertoires d'images
-	const srcImg = 'images/';
-	const albumDefaultMini = srcImg + 'noComicsMini.jpeg';
-	const albumDefault = srcImg + 'noComics.jpeg';
-	const srcAlbumMini = 'albumsMini/';
-	const srcAlbum = 'albums/';
 
-	// Sélection des éléments du DOM
-	const txtSerie = document.querySelector('#serie');
-	const txtNumero = document.querySelector('#numero');
-	const txtTitre = document.querySelector('#titre');
-	const txtAuteur = document.querySelector('#auteur');
-	const txtPrix = document.querySelector('#prix');
-	const imgAlbum = document.querySelector('#album');
-	const imgAlbumMini = document.querySelector('#albumMini');
+// Chemins vers les images par défaut et les répertoires d'images
+const srcImg = 'images/';
+const albumDefaultMini = srcImg + 'noComicsMini.jpeg';
+const albumDefault = srcImg + 'noComics.jpeg';
+const srcAlbumMini = 'albumsMini/';
+const srcAlbum = 'albums/';
 
-	// Gestion des événements d'erreur pour les images
-	imgAlbum.addEventListener('error', handleImageError);
-	imgAlbumMini.addEventListener('error', handleImageError);
+// Sélection des éléments du DOM
+const elements = {
+  txtSerie: document.querySelector('#serie'),
+  txtNumero: document.querySelector('#numero'),
+  txtTitre: document.querySelector('#titre'),
+  txtAuteur: document.querySelector('#auteur'),
+  txtPrix: document.querySelector('#prix'),
+  imgAlbum: document.querySelector('#album'),
+  imgAlbumMini: document.querySelector('#albumMini'),
+  id: document.querySelector('#id')
+};
 
-	const id = document.querySelector('#id');
-	id.addEventListener('change', function () {
-		getAlbum(this);
-	});
+// Gestion des événements d'erreur pour les images
+elements.imgAlbum.addEventListener('error', handleImageError);
+elements.imgAlbumMini.addEventListener('error', handleImageError);
 
-
-	// Fonction pour obtenir les détails de l'album en fonction de son ID
-	function getAlbum(num) {
-		const albumId = num.value;
-
-		const albumDetails = getAlbumDetails(albumId);
-		if (!albumDetails) {
-			// Si les détails sont disponibles, affiche les détails et les images correspondantes
-			clearAlbumDetails();
-			afficheAlbums(imgAlbumMini, imgAlbum, srcAlbumMini + 'defaultMini.jpeg', srcAlbum + 'default.jpeg');
-		} else {
-			// Si les détails ne sont pas disponibles, affiche les images par défaut
-
-			const cheminImageMiniature = srcAlbumMini + albumDetails.imageMiniature;
-			const cheminImageNormale = srcAlbum + albumDetails.imageNormale;
-
-			displayAlbumDetails(albumDetails);
-			afficheAlbums(imgAlbumMini, imgAlbum, cheminImageMiniature, cheminImageNormale);
-		}
-	}
-
-	// Fonction pour afficher les détails de l'album dans les éléments de l'interface utilisateur
-	function displayAlbumDetails(albumDetails) {
-		txtSerie.value = albumDetails.serie;
-		txtNumero.value = albumDetails.numero;
-		txtTitre.value = albumDetails.titre;
-		txtAuteur.value = albumDetails.auteur;
-		txtPrix.value = albumDetails.prix;
-	}
-
-	// Fonction pour réinitialiser les champs de détails d'album
-	function clearAlbumDetails() {
-		txtSerie.value = '';
-		txtNumero.value = '';
-		txtTitre.value = '';
-		txtAuteur.value = '';
-		txtPrix.value = 0;
-	}
-
-	// Fonction pour afficher les images de l'album avec un effet de transition
-	function afficheAlbums(albumMini, album, nomFicMini, nomFic) {
-		albumMini.src = nomFicMini;
-		album.src = nomFic;
-
-		addTransitionEffect(albumMini);
-		addTransitionEffect(album);
-	}
-
-	// Fonction pour ajouter un effet de transition à un élément spécifié
-	function addTransitionEffect(element) {
-		element.classList.add('transition-effect');
-		setTimeout(() => {
-			element.classList.remove('transition-effect');
-		}, 1000);
-
-	}
-
-	function getAlbum(num) {
-		const albumId = num.value;
-
-		// Récupère les détails de l'album en utilisant son ID dans la collection d'albums
-		const album = albums.get(albumId);
-
-		// Si l'album n'est pas trouvé, efface les détails affichés et montre des images par défaut
-		if (!album) {
-			clearAlbumDetails();
-			afficheAlbums(imgAlbumMini, imgAlbum, albumDefaultMini, albumDefault);
-
-			// Si l'album est trouvé, récupère les détails de la série et de l'auteur associés à cet album
-		} else {
-			const serie = series.get(album.idSerie);
-			const auteur = auteurs.get(album.idAuteur);
-
-			// Met à jour les champs d'affichage avec les détails de l'album, de la série et de l'auteur
-			txtSerie.value = serie.nom;
-			txtNumero.value = album.numero;
-			txtTitre.value = album.titre;
-			txtAuteur.value = auteur.nom;
-			txtPrix.value = album.prix;
-
-			// Crée un nom de fichier pour les images de l'album en combinant les détails de l'album
-			let nomFic = serie.nom + '-' + album.numero + '-' + album.titre;
-
-			// Utilisation d'une expression régulière pour supprimer les caractères non autorisés dans les noms de fichiers : '!?.":$
-			nomFic = nomFic.replace(/'|!|\?|\.|"|:|\$/g, '');
-
-			// Affiche les images de l'album en utilisant les chemins appropriés basés sur le nom de fichier construit
-			afficheAlbums(
-				imgAlbumMini,
-				imgAlbum,
-				srcAlbumMini + nomFic + '.jpg',
-				srcAlbum + nomFic + '.jpg'
-			);
-		}
-	}
-
-	// Fonction pour effacer les détails affichés de l'album
-	function clearAlbumDetails() {
-		txtSerie.value = '';
-		txtNumero.value = '';
-		txtTitre.value = '';
-		txtAuteur.value = '';
-		txtPrix.value = 0;
-	}
-
-	// Fonction pour gérer les erreurs d'image
-	function handleImageError(img) {
-		img.src = './noComics.jpeg';
-		img.alt = 'Image non disponible';
-		img.onerror = null;
-	}
+// Événement de changement de l'ID
+elements.id.addEventListener('change', function () {
+  getAlbum(this);
 });
 
+// Obtention des détails de l'album en fonction de son ID
+function getAlbum(num) {
+  const albumId = num.value;
+  const albumDetails = getAlbumDetails(albumId);
+
+  if (!albumDetails) {
+    clearAlbumDetails();
+    displayDefaultImages();
+  } else {
+    const { imageMiniature, imageNormale } = albumDetails;
+    displayAlbumDetails(albumDetails);
+    displayAlbumImages(imageMiniature, imageNormale);
+  }
+}
+
+// Affichage des détails de l'album dans les éléments de l'interface utilisateur
+function displayAlbumDetails(albumDetails) {
+  for (const key in albumDetails) {
+    if (elements[key]) {
+      elements[key].value = albumDetails[key];
+    }
+  }
+}
+
+// Réinitialisation des champs de détails d'album
+function clearAlbumDetails() {
+  for (const key in elements) {
+    if (key.startsWith('txt')) {
+      elements[key].value = '';
+    }
+  }
+  elements.txtPrix.value = 0;
+}
+
+// Affichage des images de l'album avec un effet de transition
+function displayAlbumImages(imageMiniature, imageNormale) {
+  elements.imgAlbumMini.src = srcAlbumMini + imageMiniature;
+  elements.imgAlbum.src = srcAlbum + imageNormale;
+
+  addTransitionEffect(elements.imgAlbumMini);
+  addTransitionEffect(elements.imgAlbum);
+}
+
+// Ajout d'un effet de transition à un élément spécifié
+function addTransitionEffect(element) {
+  element.classList.add('transition-effect');
+  setTimeout(() => {
+    element.classList.remove('transition-effect');
+  }, 1000);
+}
+
+// Affichage des images par défaut en cas d'absence de détails d'album
+function displayDefaultImages() {
+  displayAlbumImages('defaultMini.jpeg', 'default.jpeg');
+}
+
+// Gestion des erreurs d'image
+function handleImageError(img) {
+  img.src = './noComics.jpeg';
+  img.alt = 'Image non disponible';
+  img.onerror = null;
+}
+});
 
 
 
@@ -355,7 +310,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
 //FONCTION POUR AFFICHER LE MODE TABLEAU OU CARD SELON LA TAILLE DE L'ECRAN
 
 // Fonction pour mapper les albums à un tableau
@@ -534,8 +488,5 @@ function displayAlbumsAsCardsWithPagination(albumsData, container) {
     // Appel initial des fonctions de pagination
   window.addEventListener('resize', detectAndDisplayFormat);
 
-  window.addEventListener('load', function () {
-    displayAlbums('table'); // Affichage initial en format tableau
-    displayAlbums('cards'); // Affichage initial en format cartes
-});
+
 }
