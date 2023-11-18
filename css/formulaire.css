@@ -110,9 +110,69 @@ body>nav {
   background: linear-gradient(0deg, rgba(133, 125, 125, 1) 10%, rgba(189, 189, 189, 1) 55%);
 }
 
+
+
 body>div.container>div.wrapper>div>div>div {
   background: linear-gradient(0deg, rgba(198, 177, 177, 1) 23%, rgba(220, 202, 202, 0.6839110644257703) 83%);
 
+}
+
+body > div.container > div.wrapper > div > div > div > div:nth-child(2) {
+  margin:1rem;
+}
+
+body > div.container > div.wrapper > div > div > div > div:nth-child(3) {
+  margin:1rem;
+}
+
+body > div.container > div.wrapper > div > div > div > div:nth-child(4) {
+  margin:1rem;
+}
+
+body > div.container > div.wrapper > div > div > div > div:nth-child(5) {
+  margin:1rem;
+}
+
+body > div.container > div.wrapper > div > div > div > div:nth-child(6) {
+  margin:1rem;
+}
+
+body > div.container > div.wrapper > div > div > div {
+  width: 50rem;
+}
+
+body > div.container > div.wrapper > div > div > div > div.container > h1 {
+  margin:1rem;
+}
+
+body > div.container > div.wrapper > div > div > div > div.container > div:nth-child(2) {
+  margin:1rem;
+}
+
+body > div.container > div.wrapper > div > div > div > div.container > div:nth-child(3) {
+  margin:1rem;
+}
+
+#genre {
+  width: 25rem;
+  margin-left: 2.9rem;
+}
+
+#lastName {
+  margin-left: 3.9rem;
+
+}
+
+#firstName {
+  margin-left: 2.3rem;
+}
+
+#numberPhone {
+  margin-left: 1.3rem;
+}
+
+#password {
+  margin-left: 5.8rem;
 }
 
 #change-password {

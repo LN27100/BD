@@ -20,8 +20,8 @@
 <body>
 
   <!-- Navbar -->
-   <!-- Navbar -->
-   <nav class="navbar navbar-expand-lg navbar-light ">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light ">
     <a class="navbar-brand" href="BD.html"><img class="logo" src="images/meilleur.png" alt="logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -113,7 +113,7 @@
   </div>
   </div>
 
-    </div>
+  </div>
   </div>
   <div class="container">
 
@@ -128,18 +128,15 @@
           <div class="card">
             <p class="card-text">PROFIL</p>
 
-
-
-            <img id="imagePreview" src="" alt="Aperçu de l'image" style="display: none; max-width: 100px;">
-
-
-            <label for="genre">Genre :</label>
-            <select id="genre" aria-label="Default select example" name="genre">
-              <option selected>faites votre choix</option>
-              <option value="féminin">Féminin</option>
-              <option value="masculin">Masculin</option>
-              <option value="Ne souhaite pas répondre">Ne souhaite pas répondre</option>
-            </select>
+            <div>
+              <label for="genre">Genre :</label>
+              <select id="genre" aria-label="Default select example" name="genre">
+                <option selected>faites votre choix</option>
+                <option value="féminin">Féminin</option>
+                <option value="masculin">Masculin</option>
+                <option value="Ne souhaite pas répondre">Ne souhaite pas répondre</option>
+              </select>
+            </div>
 
             <div><label for="lastName">Nom:</label>
               <input id="lastName" type="text" name="lastName">
@@ -149,7 +146,7 @@
               <input id="firstName" type="text" name="firstName">
             </div>
 
-            <div><label for="numberPhone">Numéro de contact :</label>
+            <div><label for="numberPhone">Téléphone :</label>
               <input id="numberPhone" type="number" name="numberPhone">
             </div>
 
@@ -160,21 +157,19 @@
             <div class="container">
               <h1>Définir un mot de passe </h1>
               <div>
-                <label for="password">Mot de passe</label>
+                <label for="password">Mot de passe : </label>
                 <input id="password" type="password">
                 <button id="show-password"><i class="bi bi-eye-slash-fill"></i></button>
               </div>
 
               <div>
-                <label for="confirm-password">Confirmer le mot de passe</label>
+                <label for="confirm-password">Confirmer le mot de passe : </label>
                 <input id="confirm-password" type="password">
                 <button id="show-confirmPassword"><i class="bi bi-eye-slash-fill"></i>
                 </button>
+                <p id="informations"></p>
+                <button id="change-password">Envoyer</button>
               </div>
-              <br>
-              <p id="informations"></p>
-              <button id="change-password">Envoyer</button>
-
             </div>
             <a href="confirmationInsc.html" target="_blank" class="buttonSubmit">Soumettre</a>
           </div>
@@ -192,14 +187,14 @@
         </a>
         <span>© 2023 LN, DWWM Afpa</span>
       </div>
-  
+
       <ul class="nav d-flex">
         <li class="ms-3"><a class="text-muted"><i class="fab fa-twitter"></i></a></li>
         <li class="ms-3"><a class="text-muted"><i class="fab fa-instagram"></i></a></li>
         <li class="ms-3"><a class="text-muted"><i class="fab fa-facebook"></i></a></li>
       </ul>
     </footer>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
       integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
       crossorigin="anonymous"></script>
