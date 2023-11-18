@@ -406,7 +406,7 @@ function displayAlbumsAsTableWithPagination(albumsData, container) {
             // Création du lien pour l'image correspondante avec les détails de l'album
             const imageLink = document.createElement('a');
             const albumImagePath = `albums/${series.get(album.idSerie).nom}-${album.numero}-${album.titre}.jpg`;
-            const imageDetails = `descriptifAlbum.html?image=${encodeURIComponent(albumImagePath)}&titre=${encodeURIComponent(album.titre)}&prix=${encodeURIComponent(album.prix)}`;
+            const imageDetails = `./descriptifAlbum.html?details=${encodeURIComponent(JSON.stringify(album))}`;
             imageLink.href = imageDetails;
     
             const image = document.createElement('img');
@@ -422,11 +422,9 @@ function displayAlbumsAsTableWithPagination(albumsData, container) {
             // Gestion de l'événement de clic sur l'image pour ouvrir une nouvelle fenêtre avec la nouvelle page
             imageLink.addEventListener('click', function (event) {
                 event.preventDefault();
-                const newWindow = window.open('', '_blank');
-                newWindow.location.href = imageLink.href;
+                window.location.href = imageLink.href;
             });
     
-
             // Création des autres cellules pour les détails de l'album
             const otherCellsHTML = `
                 <td>${album.idSerie}</td>
