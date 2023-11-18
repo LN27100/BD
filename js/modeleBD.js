@@ -347,7 +347,7 @@ function init() {
                 const image = document.createElement('img');
                 image.src = albumImagePath;
                 image.alt = 'Image';
-                image.style.width = '150px';
+                image.style.width = '120px';
                 image.style.height = 'auto';
 
 

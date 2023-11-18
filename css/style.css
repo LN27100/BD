@@ -39,7 +39,6 @@ fieldset {
   appearance: none;
   /* Ajout de la propriété standard pour la compatibilité */
 
-
   width: 100%;
   border: 1px solid #333;
   margin: 0;
@@ -68,7 +67,6 @@ input:focus:invalid {
 
 body {
   background-image: url(/images/backgroundAccueil.jpg);
-
 }
 
 body>nav {
@@ -261,6 +259,7 @@ footer {
 #albumTable>table>thead>tr {
   font-size: 1rem;
 }
+
 
 #results>div {
   padding: 1rem;
@@ -508,9 +507,7 @@ body > main > div.letter-image > div.animated-mail > div.left-fold {
 
 .letter-context {
   width: 100%;
-  font-family: 'Zen Tokyo Zoo', sans-serif;
   font-size: 30px;
-  color: red;
   text-align: center;
 }
 
