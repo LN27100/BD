@@ -1,0 +1,418 @@
+@import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Marhey&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+body {
+    font: 1rem sans-serif;
+    padding: 0;
+    margin: 0;
+    place-items: center;
+
+}
+
+form {
+    max-width: 300px;
+    margin: 0;
+    padding: 0 5px;
+}
+
+p>label {
+    display: block;
+}
+
+
+input[type=text],
+input[type=email],
+input[type=number],
+textarea,
+fieldset {
+    /* requis pour composer de manière appropriée les éléments
+     de formulaire sur les navigateurs fondés sur WebKit */
+    -webkit-appearance: none;
+    /* RAJOUT DE LA PROPRIETE APPERANCE */
+    appearance: none;
+    /* Ajout de la propriété standard pour la compatibilité */
+
+
+    width: 100%;
+    border: 1px solid #333;
+    margin: 0;
+
+    font-family: inherit;
+    font-size: 90%;
+
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+input:invalid {
+    box-shadow: 0 0 5px 1px red;
+}
+
+input:focus:invalid {
+    outline: none;
+}
+
+#erreur {
+    color: red;
+}
+
+
+/* MON CODE */
+
+body {
+    background-image: url(/images/backgroundAccueil.jpg);
+
+}
+
+body>nav {
+    height: 14rem;
+}
+
+.navbar {
+    font-family: 'Marhey';
+    padding-left: 2rem;
+    color: white;
+    background: radial-gradient(circle, rgba(110, 108, 108, 1) 34%, rgba(128, 124, 124, 1) 70%, rgba(161, 160, 160, 1) 100%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.navbar-brand {
+    color: white;
+    font-family: 'Marhey';
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 5rem;
+    padding: 1rem;
+}
+
+.logo {
+    width: 13rem;
+    height: auto;
+}
+
+#navbarSupportedContent>ul>li.nav-item.dropdown>a {
+    color: white;
+    font-size: 1.5rem;
+    margin: 5rem;
+    background: linear-gradient(0deg, rgba(133, 125, 125, 1) 10%, rgba(189, 189, 189, 1) 55%);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    border-radius: 50px;
+    padding: 1rem;
+}
+
+#navbarSupportedContent>ul>li.nav-item.dropdown>ul {
+    background: linear-gradient(0deg, rgba(133, 125, 125, 1) 10%, rgba(189, 189, 189, 1) 55%);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    padding: 1rem;
+}
+
+.dropdown-item {
+    color: white;
+    font-family: 'Marhey';
+
+}
+
+#navbarSupportedContent>ul>li:nth-child(2)>a {
+    font-family: 'Marhey';
+    color: white;
+    font-size: 1.5rem;
+    margin: 5rem;
+    background: linear-gradient(0deg, rgba(133, 125, 125, 1) 10%, rgba(189, 189, 189, 1) 55%);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    border-radius: 50px;
+    padding: 1rem;
+}
+
+#sidenav-3 {
+    margin: 1rem;
+}
+
+h1 {
+    font-family: 'Marhey';
+    font-size: 3rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    list-style: none;
+}
+
+#results {
+    font-family: 'Marhey';
+    color: white;
+}
+
+#messageId>label {
+    font-family: 'Marhey';
+    color: white;
+}
+
+h2 {
+    font-family: 'Marhey';
+    color: white;
+    visibility: hidden;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+}
+
+
+
+/* SCROLLBAR CUSTOMISEE */
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #c6b1b1;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #857d7d;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #857d7d;
+}
+
+/* FOOTER */
+body>footer>div>span {
+    font-family: 'Marhey';
+
+    color: white;
+}
+
+footer {
+    justify-content: center;
+}
+
+.fab {
+    color: white;
+}
+
+.cart {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.cart h2 {
+    margin-bottom: 10px;
+}
+
+.cart ul {
+    list-style: none;
+    padding: 0;
+}
+
+.cart li {
+    margin-bottom: 5px;
+}
+
+
+/* Effet de transition */
+.transition-effect {
+    transition: opacity 0.5s ease;
+    /* Transition sur l'opacité pendant 0.5 seconde */
+}
+
+/* Opacité pour l'effet de transition */
+#albumMini.transition-effect,
+#album.transition-effect {
+    opacity: 0;
+    /* L'image est invisible (opacité à 0) */
+}
+
+
+
+.album-table {
+    border-collapse: collapse;
+}
+
+.album-table th,
+.album-table td {
+    background: linear-gradient(0deg, rgba(90, 88, 88, 1) 23%, rgba(90, 88, 88, 1) 40%, rgba(135, 131, 132, 1) 69%, rgba(151, 147, 148, 1) 83%);
+    color: white;
+    font-family: 'Marhey';
+    font-weight: lighter;
+    border: 1px solid #000;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    text-align: left;
+}
+
+#albumTable>table>thead>tr {
+    font-size: 1rem;
+}
+
+
+
+#results>div {
+    padding: 1rem;
+    width: 18rem;
+    margin: 1rem;
+    border-radius: 5px;
+    background: linear-gradient(0deg, rgba(198, 177, 177, 1) 23%, rgba(220, 202, 202, 0.6839110644257703) 83%);
+}
+
+#results>div>img {
+    margin-bottom: 1rem;
+}
+
+#results>div>div>a.btn.addToCartButton {
+    margin: 0.5rem;
+}
+
+#results>div>div>a.btn.removeFromCartButton {
+    margin: 0.5rem;
+}
+
+.btn:hover {
+    color: white;
+    background: linear-gradient(0deg, rgba(110, 109, 107, 0.7287289915966386) 20%, rgba(69, 69, 69, 0.6530987394957983) 45%);
+}
+
+.btn {
+    background: linear-gradient(0deg, rgba(133, 125, 125, 1) 10%, rgba(189, 189, 189, 1) 55%);
+}
+
+.return {
+    text-decoration: none;
+    font-family: 'Marhey';
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    background: linear-gradient(0deg, rgba(133, 125, 125, 1) 10%, rgba(189, 189, 189, 1) 55%);
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.return:hover {
+    color: white;
+    background: linear-gradient(0deg, rgba(110, 109, 107, 0.7287289915966386) 20%, rgba(69, 69, 69, 0.6530987394957983) 45%);
+}
+
+#offcanvasExample>div.offcanvas-body>a>button {
+    border-radius: 5px;
+    color: white;
+    font-family: 'Marhey';
+    background: linear-gradient(0deg, rgba(110, 109, 107, 0.7287289915966386) 20%, rgba(69, 69, 69, 0.6530987394957983) 45%);
+}
+
+#offcanvasExample>div.offcanvas-body>a>button:hover {
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    background: linear-gradient(0deg, rgba(133, 125, 125, 1) 10%, rgba(189, 189, 189, 1) 55%);
+    border-radius: 5px;
+}
+
+#offcanvasExample {
+    font-family: 'Marhey';
+    background: linear-gradient(0deg, rgba(198, 177, 177, 1) 23%, rgba(220, 202, 202, 0.6839110644257703) 83%);
+}
+
+#offcanvasExampleLabel {
+    font-family: 'Marhey';
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+body>div.album-details>ul {
+    color: white;
+    background-color: #614c4c;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+body>div.album-details>img {
+    height: 300px;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+    .navbar-brand {
+        margin: 1rem;
+        font-size: 1.2rem;
+    }
+
+    #navbarSupportedContent>ul>li.nav-item.dropdown>a {
+        margin: 1rem;
+        font-size: 1rem;
+    }
+
+    .navbar-nav {
+        display: none;
+    }
+
+    .navbar-toggler {
+        display: block;
+    }
+
+
+    .navbar-toggler.collapsed+.navbar-nav {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-brand {
+        margin: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .logo {
+        width: 8rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    form {
+        max-width: 100%;
+        /* Utilisation de la largeur maximale disponible */
+        margin: 0;
+        /* Réinitialisation de la marge pour occuper toute la largeur */
+        padding: 0;
+        /* Réinitialisation du padding */
+    }
+
+
+    .navbar-brand {
+        margin: 0;
+        display: none;
+        /* Masquer le logo sur les petits écrans */
+    }
+
+    #navbarSupportedContent>ul>li.nav-item.dropdown>a,
+    #navbarSupportedContent>ul>li:nth-child(2)>a {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    .navbar {
+        margin-bottom: 5rem;
+    }
+}

@@ -419,11 +419,7 @@ function displayAlbumsAsTableWithPagination(albumsData, container) {
             imageCell.appendChild(imageLink);
             row.appendChild(imageCell);
     
-            // Gestion de l'événement de clic sur l'image pour ouvrir une nouvelle fenêtre avec la nouvelle page
-            imageLink.addEventListener('click', function (event) {
-                event.preventDefault();
-                window.location.href = imageLink.href;
-            });
+        
     
             // Création des autres cellules pour les détails de l'album
             const otherCellsHTML = `
@@ -578,4 +574,53 @@ function displayAlbumsAsCardsWithPagination(albumsData, container) {
 
     // Appel initial des fonctions de pagination
     window.addEventListener('resize', detectAndDisplayFormat);
+}
+
+
+
+
+// RECUPERATION DES PARAMETRES D'URL DU TABLEAU
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const detailsParam = urlParams.get('details');
+
+if (detailsParam) {
+    // Décodage des données JSON
+    const albumDetails = JSON.parse(decodeURIComponent(detailsParam));
+
+    // Affichage des détails dans la page
+    const detailsContainer = document.createElement('div');
+    detailsContainer.classList.add('album-details');
+
+    const albumTitle = document.createElement('h2');
+    albumTitle.textContent = albumDetails.titre;
+
+    const albumImage = document.createElement('img');
+    albumImage.src = `albums/${series.get(albumDetails.idSerie).nom}-${albumDetails.numero}-${albumDetails.titre}.jpg`;
+    albumImage.alt = 'Image de l\'album';
+
+    const albumDetailsList = document.createElement('ul');
+    const seriesItem = document.createElement('li');
+    seriesItem.textContent = `Série: ${albumDetails.idSerie}`;
+
+    const numberItem = document.createElement('li');
+    numberItem.textContent = `Numéro: ${albumDetails.numero}`;
+
+    const authorItem = document.createElement('li');
+    authorItem.textContent = `Auteur: ${albumDetails.idAuteur}`;
+
+    const priceItem = document.createElement('li');
+    priceItem.textContent = `Prix: ${albumDetails.prix}€`;
+
+    albumDetailsList.appendChild(seriesItem);
+    albumDetailsList.appendChild(numberItem);
+    albumDetailsList.appendChild(authorItem);
+    albumDetailsList.appendChild(priceItem);
+
+    detailsContainer.appendChild(albumTitle);
+    detailsContainer.appendChild(albumImage);
+    detailsContainer.appendChild(albumDetailsList);
+
+    // Affichage des détails dans la page HTML
+    document.body.appendChild(detailsContainer);
 }

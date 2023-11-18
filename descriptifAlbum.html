@@ -11,9 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/descriptifAlbum.css">
 
-
-  <link rel="stylesheet" href="css/style.css">
   <title>Les BD</title>
 </head>
 
@@ -23,9 +22,9 @@
   <nav class="navbar navbar-expand-lg navbar-light ">
     <a class="navbar-brand" href="BD.html"><img class="logo" src="images/meilleur.png" alt="logo"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
@@ -111,35 +110,22 @@
   </div>
   </div>
 
-
   <main class="container mt-4">
-
-
     <!-- Résultats de la recherche -->
-  <div id="results" class="row"></div>
-  <br>
-  <br>
+    <div id="results" class="row"></div>
+    <br>
+    <br>
 
-
-  <div class="album-details">
-    <h1>Description de l'Album</h1>
-    <div class="album-card">
-        <img id="albumImage" src="" alt="Image de l'album">
-        <div class="album-info">
-            <h2 id="albumTitle"></h2>
-            <p><strong>Série:</strong> <span id="albumSerie"></span></p>
-            <p><strong>Numéro:</strong> <span id="albumNumero"></span></p>
-            <p><strong>Auteur:</strong> <span id="albumAuteur"></span></p>
-            <p><strong>Prix:</strong> <span id="albumPrix"></span>€</p>
-            <!-- Ajoute d'autres détails de l'album si nécessaire -->
-        </div>
+    <div class="album-details">
+      <h1>Description de l'Album</h1>
+      <div class="album-details">
+        <!-- Les détails de l'album seront ajoutés ici dynamiquement -->
+      </div>
     </div>
-</div>
+   
+  </main>
 
-</main>
-
-
-<footer class="d-flex flex-wrap py-3 my-3 border-top">
+  <footer class="d-flex flex-wrap py-3 my-3 border-top">
     <div class="col-md-4 d-flex">
       <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
         <svg class="bi" width="30" height="24">
@@ -156,10 +142,13 @@
     </ul>
   </footer>
 
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
     integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
     crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
   <script src="data/albums.js"></script>
   <script src="data/series.js"></script>
   <script src="data/auteurs.js"></script>
