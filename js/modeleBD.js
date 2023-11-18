@@ -141,6 +141,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+//MON CODE
+
 // AJOUTER OU RETIRER UN ALBUM DU PANIER
 
 // Sélection des éléments du DOM pour le panier
@@ -351,156 +353,189 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+
+
+
 //FONCTION POUR AFFICHER LE MODE TABLEAU OU CARD SELON LA TAILLE DE L'ECRAN
-function detectAndDisplayFormat() {
-	const windowWidth = window.innerWidth;
 
-	if (windowWidth < 800) {
-		console.log("Petit écran");
-		displayAlbums('cards');
-
-	} else {
-		console.log("Grand écran");
-		displayAlbums('table');
-	}
-}
-
-// Appel initial de la fonction pour déterminer le format de la fenêtre
-detectAndDisplayFormat();
-
-// Écouteur d'événement pour détecter les changements de taille de fenêtre
-window.addEventListener('resize', detectAndDisplayFormat);
-
+// Fonction pour mapper les albums à un tableau
 function mapToAlbumsArray(albumsMap) {
-	const albumsArray = [];
+    const albumsArray = [];
 
-	for (const [key, value] of albumsMap) {
-		const album = {
-			id: key,
-			titre: value.titre,
-			numero: value.numero,
-			idSerie: value.idSerie,
-			idAuteur: value.idAuteur,
-			prix: parseFloat(value.prix)
-		};
-		albumsArray.push(album);
-	}
+    for (const [key, value] of albumsMap) {
+        const album = {
+            id: key,
+            titre: value.titre,
+            numero: value.numero,
+            idSerie: value.idSerie,
+            idAuteur: value.idAuteur,
+            prix: parseFloat(value.prix)
+        };
+        albumsArray.push(album);
+    }
 
-	return albumsArray;
+    return albumsArray;
 }
 
+// Fonction pour afficher les albums avec le format souhaité (tableau ou cartes) en fonction de la taille de l'écran
 async function displayAlbums(viewType) {
-	const albumsArray = mapToAlbumsArray(albums);
+    const albumsArray = mapToAlbumsArray(albums);
 
-	const container = viewType === 'cards' ? document.getElementById('result') : document.getElementById('albumTable');
-	container.innerHTML = '';
+    const container = viewType === 'cards' ? document.getElementById('result') : document.getElementById('albumTable');
+    container.innerHTML = '';
 
-	if (viewType === 'table') {
-		displayAlbumsAsTable(albumsArray, container);
-	} else {
-		displayAlbumsAsCards(albumsArray, container);
-	}
+    if (viewType === 'table') {
+        displayAlbumsAsTableWithPagination(albumsArray, container); // Utilisation de la fonction correctement définie
+    } else {
+        displayAlbumsAsCardsWithPagination(albumsArray, container); // Utilisation de la fonction correctement définie
+    }
 }
 
-// Fonction pour afficher les albums sous forme de tableau
-function displayAlbumsAsTable(albumsData, container) {
-    // Crée un conteneur pour le tableau
-    const tableContainer = document.createElement('div');
-    tableContainer.classList.add('album-table-container'); // Ajoute une classe pour le style
+// Fonction pour détecter et afficher le format (tableau ou cartes) en fonction de la taille de l'écran
+function detectAndDisplayFormat() {
+    const windowWidth = window.innerWidth;
 
-    // Crée un élément tableau
-    const table = document.createElement('table');
-    table.classList.add('album-table'); // Ajoute une classe pour le style
+    if (windowWidth < 800) {
+        console.log("Petit écran");
+        displayAlbums('cards');
+    } else {
+        console.log("Grand écran");
+        displayAlbums('table');
+    }
+}
 
-    // Crée l'en-tête du tableau
-    const tableHeader = document.createElement('thead');
-    const headerRow = document.createElement('tr');
-    // Ajoute les titres des colonnes
-    headerRow.innerHTML = `
-        <th>Image</th>
-        <th>Série</th>
-        <th>Numéro</th>
-        <th>Titre</th>
-        <th>Auteur</th>
-        <th>Prix</th>
-        <th>Ajouter au panier</th>
-        <th>Retirer du panier</th>
-    `;
-    tableHeader.appendChild(headerRow); // Ajoute la ligne d'en-tête au tableau
-    table.appendChild(tableHeader); // Ajoute l'en-tête au tableau
+detectAndDisplayFormat(); // Appel initial pour déterminer le format de la fenêtre
 
-    // Crée le corps du tableau
-    const tableBody = document.createElement('tbody');
 
-    // Parcourt les données des albums pour créer les lignes du tableau
-    albumsData.forEach(album => {
-        const row = document.createElement('tr'); // Crée une ligne pour chaque album
+//  Fonction pour afficher les albums sous forme de tableau avec pagination
+function displayAlbumsAsTableWithPagination(albumsData, container) {
+    const itemsPerPage = 50; // Nombre d'éléments par page
+    let currentPage = 1; // Page actuelle
 
-        // Ajoute les données de l'album dans les cellules de la ligne
-        row.innerHTML = `
-            <td><img src="./albumsMini/${album.idSerie}-${album.numero}-${album.titre}.jpg" alt="Image"></td>
-            <td>${album.idSerie}</td>
-            <td>${album.numero}</td>
-            <td>${album.titre}</td>
-            <td>${album.idAuteur}</td>
-            <td>${album.prix}€</td>
+    function displayTablePage(page) {
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const paginatedAlbums = albumsData.slice(start, end);
+
+        // Création du tableau
+        const tableContainer = document.createElement('div');
+        tableContainer.classList.add('album-table-container');
+
+        const table = document.createElement('table');
+        table.classList.add('album-table');
+
+        const tableHeader = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        headerRow.innerHTML = `
+            <th>Image</th>
+            <th>Série</th>
+            <th>Numéro</th>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Prix</th>
+            <th>Ajouter au panier</th>
+            <th>Retirer du panier</th>
         `;
+        tableHeader.appendChild(headerRow);
+        table.appendChild(tableHeader);
 
-        // Crée des cellules pour les boutons "Ajouter au panier" et "Retirer du panier"
-        const addToCartCell = document.createElement('td');
-        const addToCartButton = document.createElement('button');
-        addToCartButton.classList.add('btn', 'addToCartButton');
-        addToCartButton.textContent = 'Ajouter au panier';
-        addToCartCell.appendChild(addToCartButton);
-        row.appendChild(addToCartCell); // Ajoute le bouton "Ajouter au panier" à la ligne du tableau
+        const tableBody = document.createElement('tbody');
 
-        const removeFromCartCell = document.createElement('td');
-        const removeFromCartButton = document.createElement('button');
-        removeFromCartButton.classList.add('btn', 'removeFromCartButton');
-        removeFromCartButton.textContent = 'Retirer du panier';
-        removeFromCartCell.appendChild(removeFromCartButton);
-        row.appendChild(removeFromCartCell); // Ajoute le bouton "Retirer du panier" à la ligne du tableau
+        paginatedAlbums.forEach(album => {
+            const row = document.createElement('tr');
 
-        // Ajoute des écouteurs d'événements pour les boutons "Ajouter au panier" et "Retirer du panier"
-        addToCartButton.addEventListener('click', function () {
-            addToCart(album.titre, album.prix); // Appelle la fonction pour ajouter l'album au panier
+            row.innerHTML = `
+                <td><img src="./albumsMini/${album.idSerie}-${album.numero}-${album.titre}.jpg" alt="Image"></td>
+                <td>${album.idSerie}</td>
+                <td>${album.numero}</td>
+                <td>${album.titre}</td>
+                <td>${album.idAuteur}</td>
+                <td>${album.prix}€</td>
+            `;
+
+            const addToCartCell = document.createElement('td');
+            const addToCartButton = document.createElement('button');
+            addToCartButton.classList.add('btn', 'addToCartButton');
+            addToCartButton.textContent = 'Ajouter au panier';
+            addToCartCell.appendChild(addToCartButton);
+            row.appendChild(addToCartCell);
+
+            const removeFromCartCell = document.createElement('td');
+            const removeFromCartButton = document.createElement('button');
+            removeFromCartButton.classList.add('btn', 'removeFromCartButton');
+            removeFromCartButton.textContent = 'Retirer du panier';
+            removeFromCartCell.appendChild(removeFromCartButton);
+            row.appendChild(removeFromCartCell);
+
+            addToCartButton.addEventListener('click', function () {
+                addToCart(album.titre, album.prix);
+            });
+
+            removeFromCartButton.addEventListener('click', function () {
+                removeFromCart(album.titre, album.prix);
+            });
+
+            tableBody.appendChild(row);
         });
 
-        removeFromCartButton.addEventListener('click', function () {
-            removeFromCart(album.titre, album.prix); // Appelle la fonction pour retirer l'album du panier
-        });
+        table.appendChild(tableBody);
+        tableContainer.appendChild(table);
+        container.innerHTML = '';
+        container.appendChild(tableContainer);
+    }
 
-        tableBody.appendChild(row); // Ajoute la ligne au corps du tableau
-    });
+    function changeTablePage(page) {
+        currentPage = page;
+        displayTablePage(currentPage);
+    }
 
-    table.appendChild(tableBody); // Ajoute le corps au tableau
-    tableContainer.appendChild(table); // Ajoute le tableau dans le conteneur
-    container.appendChild(tableContainer); // Ajoute le conteneur au conteneur principal
+    displayTablePage(currentPage);
+
 }
 
-const tableBody = document.createElement('tbody');
+function displayAlbumsAsCardsWithPagination(albumsData, container) {
+    const itemsPerPage = 50; // Nombre d'éléments par page
+    let currentPage = 1; // Page actuelle
 
+    function displayCardsPage(page) {
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const paginatedAlbums = albumsData.slice(start, end);
 
-// Fonction pour afficher les albums sous forme de cartes
-function displayAlbumsAsCards(albumsData, container) {
-    const cardContainer = document.createElement('div'); // Crée un conteneur pour les cartes
+        const cardContainer = document.createElement('div');
+        cardContainer.classList.add('card-container');
 
-    albumsData.forEach(album => {
-        const cardHTML = `
-            <div class="card"> 
-                <img src="./albumsMini/${album.idSerie}-${album.numero}-${album.titre}.jpg" class="card-img-top" alt="Image">
-                <div class="card-body">
-				<h5 id="titre" class="card-title">${album.titre}</h5>
-				<p class="card-text">N°${album.numero}, Série: ${album.idSerie}, Auteur: ${album.idAuteur}</p>
-                    <button class="btn addToCartButton">Ajouter au panier</button>
-                    <button class="btn removeFromCartButton">Retirer du panier</button>
+        paginatedAlbums.forEach(album => {
+            const cardHTML = `
+                <div class="card"> 
+                    <img src="./albumsMini/${album.idSerie}-${album.numero}-${album.titre}.jpg" class="card-img-top" alt="Image">
+                    <div class="card-body">
+                        <h5 id="titre" class="card-title">${album.titre}</h5>
+                        <p class="card-text">N°${album.numero}, Série: ${album.idSerie}, Auteur: ${album.idAuteur}</p>
+                        <button class="btn addToCartButton">Ajouter au panier</button>
+                        <button class="btn removeFromCartButton">Retirer du panier</button>
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+            cardContainer.innerHTML += cardHTML;
+        });
 
-        cardContainer.innerHTML += cardHTML; // Ajoute le code HTML de la carte au conteneur
-    });
+        container.innerHTML = '';
+        container.appendChild(cardContainer);
+    }
 
-    container.appendChild(cardContainer); // Ajoute toutes les cartes au conteneur principal
+    function changeCardsPage(page) {
+        currentPage = page;
+        displayCardsPage(currentPage);
+    }
+
+    displayCardsPage(currentPage);
+
+    // Appel initial des fonctions de pagination
+  window.addEventListener('resize', detectAndDisplayFormat);
+
+  window.addEventListener('load', function () {
+    displayAlbums('table'); // Affichage initial en format tableau
+    displayAlbums('cards'); // Affichage initial en format cartes
+});
 }
-// FONCTION PAGINATION
