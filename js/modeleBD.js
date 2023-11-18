@@ -401,15 +401,28 @@ function displayAlbumsAsTableWithPagination(albumsData, container) {
         // Remplissage des lignes du tableau avec les données des albums
         paginatedAlbums.forEach(album => {
             const row = document.createElement('tr');
+            const imageCell = document.createElement('td');
 
-            row.innerHTML = `
-                <td><img src="./albumsMini/${album.idSerie}-${album.numero}-${album.titre}.jpg" alt="Image"></td>
+
+            // Création de l'image pour la cellule correspondante
+            const image = document.createElement('img');
+            image.src = `albums/${series.get(album.idSerie).nom}-${album.numero}-${album.titre}.jpg`;
+            image.alt = 'Image';
+            image.style.width = '150px'; 
+            image.style.height = 'auto'; 
+            imageCell.appendChild(image);
+            row.appendChild(imageCell);
+
+            // Création des autres cellules pour les détails de l'album
+            const otherCellsHTML = `
                 <td>${album.idSerie}</td>
                 <td>${album.numero}</td>
                 <td>${album.titre}</td>
                 <td>${album.idAuteur}</td>
                 <td>${album.prix}€</td>
-            `;
+                `;
+
+            row.innerHTML += otherCellsHTML;
 
             // Ajout de boutons pour ajouter et retirer des éléments du panier
             const addToCartCell = document.createElement('td');
@@ -458,7 +471,7 @@ function displayAlbumsAsTableWithPagination(albumsData, container) {
             if (i === currentPage) {
                 pageButton.classList.add('active');
             }
-             pageLink.addEventListener('click', function (event) {
+            pageLink.addEventListener('click', function (event) {
                 event.preventDefault();
                 changeTablePage(i);
             });
@@ -498,7 +511,7 @@ function displayAlbumsAsCardsWithPagination(albumsData, container) {
         paginatedAlbums.forEach(album => {
             const cardHTML = `
                 <div class="card"> 
-                    <img src="./albumsMini/${album.idSerie}-${album.numero}-${album.titre}.jpg" class="card-img-top" alt="Image">
+                <img src="albumsMini/${series.get(album.idSerie).nom}-${album.numero}-${album.titre}.jpg" class="card-img-top" alt="Image album">
                     <div class="card-body">
                         <h5 id="titre" class="card-title">${album.titre}</h5>
                         <p class="card-text">N°${album.numero}, Série: ${album.idSerie}, Auteur: ${album.idAuteur}</p>
