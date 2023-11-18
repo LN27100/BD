@@ -402,16 +402,30 @@ function displayAlbumsAsTableWithPagination(albumsData, container) {
         paginatedAlbums.forEach(album => {
             const row = document.createElement('tr');
             const imageCell = document.createElement('td');
-
-
-            // Création de l'image pour la cellule correspondante
+    
+            // Création du lien pour l'image correspondante avec les détails de l'album
+            const imageLink = document.createElement('a');
+            const albumImagePath = `albums/${series.get(album.idSerie).nom}-${album.numero}-${album.titre}.jpg`;
+            const imageDetails = `descriptifAlbum.html?image=${encodeURIComponent(albumImagePath)}&titre=${encodeURIComponent(album.titre)}&prix=${encodeURIComponent(album.prix)}`;
+            imageLink.href = imageDetails;
+    
             const image = document.createElement('img');
-            image.src = `albums/${series.get(album.idSerie).nom}-${album.numero}-${album.titre}.jpg`;
+            image.src = albumImagePath;
             image.alt = 'Image';
-            image.style.width = '150px'; 
-            image.style.height = 'auto'; 
-            imageCell.appendChild(image);
+            image.style.width = '150px';
+            image.style.height = 'auto';
+    
+            imageLink.appendChild(image);
+            imageCell.appendChild(imageLink);
             row.appendChild(imageCell);
+    
+            // Gestion de l'événement de clic sur l'image pour ouvrir une nouvelle fenêtre avec la nouvelle page
+            imageLink.addEventListener('click', function (event) {
+                event.preventDefault();
+                const newWindow = window.open('', '_blank');
+                newWindow.location.href = imageLink.href;
+            });
+    
 
             // Création des autres cellules pour les détails de l'album
             const otherCellsHTML = `
