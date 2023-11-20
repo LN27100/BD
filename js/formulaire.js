@@ -622,4 +622,4 @@ function displayAlbumsAsCards(albumsData, container) {
 	container.appendChild(cardContainer); // Ajoute toutes les cartes une seule fois
 }
 
-// FONCTION PAGINATION
+

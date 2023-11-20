@@ -566,7 +566,7 @@ function init() {
         detailsContainer.appendChild(albumDetailsList);
 
         // Affichage des détails dans la page HTML
-        document.body.appendChild(detailsContainer);
+        cont.appendChild(detailsContainer);
     }
 
 
@@ -619,7 +619,6 @@ function init() {
         // Met à jour le total affiché
         cartTotal.textContent = total.toFixed(2); // Fixe le total à 2 décimales
     }
-
 
 
 }
