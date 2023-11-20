@@ -336,21 +336,13 @@ footer {
     font-weight: bold;
 }
 
-body>div.album-details>ul {
+#cont > div:nth-child(5) {
     color: white;
     background-color: #614c4c;
     text-align: center;
     font-size: 1.5rem;
 }
 
-body>div.album-details>img {
-    height: 300px;
-    width: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 1rem;
-}
 
 /* RESPONSIVE */
 @media screen and (max-width: 768px) {
