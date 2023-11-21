@@ -528,4 +528,4 @@ albums.set("625", {titre: "(Avant la quête) L'emprise", numero: "A05", idSerie:
 albums.set("626", {titre: "L'héritage de Jason Mac Lane", numero: "24", idSerie: "10", idAuteur: "16", prix: "14.23"});
 albums.set("627", {titre: "La galerie des gaffes", numero: "ES01", idSerie: "67", idAuteur: "159", prix: "14.52"});
 albums.set("628", {titre: "L'étoile du matin", numero: "21", idSerie: "12", idAuteur: "157", prix: "10.26"});
-albums.set("629", {titre: "Tintin en amérique(édition originale 1932)", numero: "03", idSerie: "28", idAuteur: "31", prix: "1338509.20"});
+albums.set("629", {titre: "Tintin en amérique(édition originale 1932)", numero: "03", idSerie: "28", idAuteur: "31", prix: "250"});
