@@ -365,10 +365,10 @@ function init() {
 
                 // Création des autres cellules pour les détails de l'album
                 const otherCellsHTML = `
-                <td>${album.idSerie}</td>
+                <td>${series.get(album.idSerie).nom}</td>
                 <td>${album.numero}</td>
                 <td>${album.titre}</td>
-                <td>${album.idAuteur}</td>
+                <td>${auteurs.get(album.idAuteur).nom}</td>
                 <td>${album.prix}€</td>
                 `;
 
@@ -466,7 +466,7 @@ function init() {
                 <img src="albumsMini/${series.get(album.idSerie).nom}-${album.numero}-${album.titre}.jpg" class="card-img-top" alt="Image album">
                     <div class="card-body">
                         <h5 id="titre" class="card-title">${album.titre}</h5>
-                        <p class="card-text">N°${album.numero}, Série: ${album.idSerie}, Auteur: ${album.idAuteur}</p>
+                        <p class="card-text">N°${album.numero}, Série: ${series.get(album.idSerie).nom}, Auteur: ${auteurs.get(album.idAuteur).nom}</p>
                         <button class="btn addToCartButton">Ajouter au panier</button>
                         <button class="btn removeFromCartButton">Retirer du panier</button>
                     </div>
@@ -545,13 +545,13 @@ function init() {
 
         const albumDetailsList = document.createElement('ul');
         const seriesItem = document.createElement('li');
-        seriesItem.textContent = `Série: ${albumDetails.idSerie}`;
+        seriesItem.textContent = `Série: ${series.get(albumDetails.idSerie).nom}`;
 
         const numberItem = document.createElement('li');
         numberItem.textContent = `Numéro: ${albumDetails.numero}`;
 
         const authorItem = document.createElement('li');
-        authorItem.textContent = `Auteur: ${albumDetails.idAuteur}`;
+        authorItem.textContent = `Auteur: ${(albumDetails.idAuteur).nom}`;
 
         const priceItem = document.createElement('li');
         priceItem.textContent = `Prix: ${albumDetails.prix}€`;
