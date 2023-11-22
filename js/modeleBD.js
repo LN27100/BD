@@ -1,110 +1,11 @@
-// SUPPRESSION DU JQUERY DE BASE POUR UTILISER DES FONTIONS FULL JS
+//MON CODE
+
 
 // La fonction s'exécute lorsque le chargement du DOM est terminé
 function init() {
 
-    document.addEventListener('DOMContentLoaded', function () {
-
-        // Chemins vers les images par défaut et les répertoires d'images
-        const srcImg = 'images/';
-        const albumDefaultMini = srcImg + 'noComicsMini.jpeg';
-        const albumDefault = srcImg + 'noComics.jpeg';
-        const srcAlbumMini = 'albumsMini/';
-        const srcAlbum = 'albums/';
-
-        // Sélection des éléments du DOM
-        const elements = {
-            txtSerie: document.querySelector('#serie'),
-            txtNumero: document.querySelector('#numero'),
-            txtTitre: document.querySelector('#titre'),
-            txtAuteur: document.querySelector('#auteur'),
-            txtPrix: document.querySelector('#prix'),
-            imgAlbum: document.querySelector('#album'),
-            imgAlbumMini: document.querySelector('#albumMini'),
-            id: document.querySelector('#id')
-        };
-
-        // Gestion des événements d'erreur pour les images
-        elements.imgAlbum.addEventListener('error', handleImageError);
-        elements.imgAlbumMini.addEventListener('error', handleImageError);
-
-        // Événement de changement de l'ID
-        elements.id.addEventListener('change', function () {
-            getAlbum(this);
-        });
-
-        // Obtention des détails de l'album en fonction de son ID
-        function getAlbum(num) {
-            const albumId = num.value;
-            const albumDetails = getAlbumDetails(albumId);
-
-            if (!albumDetails) {
-                clearAlbumDetails();
-                displayDefaultImages();
-            } else {
-                const { imageMiniature, imageNormale } = albumDetails;
-                displayAlbumDetails(albumDetails);
-                displayAlbumImages(imageMiniature, imageNormale);
-            }
-        }
-
-        // Affichage des détails de l'album dans les éléments de l'interface utilisateur
-        function displayAlbumDetails(albumDetails) {
-            for (const key in albumDetails) {
-                if (elements[key]) {
-                    elements[key].value = albumDetails[key];
-                }
-            }
-        }
-
-        // Réinitialisation des champs de détails d'album
-        function clearAlbumDetails() {
-            for (const key in elements) {
-                if (key.startsWith('txt')) {
-                    elements[key].value = '';
-                }
-            }
-            elements.txtPrix.value = 0;
-        }
-
-        // Affichage des images de l'album avec un effet de transition
-        function displayAlbumImages(imageMiniature, imageNormale) {
-            elements.imgAlbumMini.src = srcAlbumMini + imageMiniature;
-            elements.imgAlbum.src = srcAlbum + imageNormale;
-
-            addTransitionEffect(elements.imgAlbumMini);
-            addTransitionEffect(elements.imgAlbum);
-        }
-
-        // Ajout d'un effet de transition à un élément spécifié
-        function addTransitionEffect(element) {
-            element.classList.add('transition-effect');
-            setTimeout(() => {
-                element.classList.remove('transition-effect');
-            }, 1000);
-        }
-
-        // Affichage des images par défaut en cas d'absence de détails d'album
-        function displayDefaultImages() {
-            let defaultMiniature = '';
-            let defaultImage = '';
-
-            // Vérifiez la vue actuelle pour définir les images par défaut
-            if (currentView === 'table') {
-                defaultMiniature = '../images/noComicsMini.jpeg'; // Remplacez par le chemin de l'image par défaut pour le tableau en version desktop
-                defaultImage = '../images/noComics.jpeg'; // Remplacez par le chemin de l'image par défaut pour le tableau en version desktop
-            } else {
-                defaultMiniature = '../images/noComicsMini.jpeg'; // Remplacez par le chemin de l'image par défaut pour les cartes en version mobile
-                defaultImage = '../images/noComics.jpeg'; // Remplacez par le chemin de l'image par défaut pour les cartes en version mobile
-            }
-
-            displayAlbumImages(defaultMiniature, defaultImage);
-        }
-    });
-
-
-    //MON CODE
-
+    // Définir le chemin vers l'image par défaut
+    const srcImg = "images/noComicsMini.jpeg";
 
     // BARRE DE RECHERCHE AVEC FILTRES
 
@@ -175,8 +76,7 @@ function init() {
         // Utilise l'id de la série pour obtenir le nom de la série
         let nomFic = series.get(album.idSerie).nom + "-" + album.numero + "-" + album.titre;
 
-        // Définir le chemin vers l'image par défaut
-        const srcImg = "images/noComicsMini.jpeg";
+
 
         // Crée l'image de la card
         const image = document.createElement('img');
@@ -240,6 +140,7 @@ function init() {
 
     //FONCTION POUR AFFICHER LE MODE TABLEAU OU CARD SELON LA TAILLE DE L'ECRAN
 
+
     // Fonction pour mapper les albums à un tableau
     function mapToAlbumsArray(albumsMap) {
         const albumsArray = [];
@@ -260,7 +161,6 @@ function init() {
     }
 
     // Ajoutez une variable pour stocker la vue actuelle
-    let currentView = ''; // Initialisez avec une chaîne vide
 
     // Fonction pour afficher les albums avec le format souhaité (tableau ou cartes) en fonction de la taille de l'écran
     async function displayAlbums(viewType) {
@@ -275,7 +175,6 @@ function init() {
             displayAlbumsAsCardsWithPagination(albumsArray, container); // Utilisation de la fonction correctement définie
         }
 
-        currentView = viewType; // Mettez à jour la vue actuelle
 
     }
 
@@ -349,13 +248,13 @@ function init() {
                 image.style.width = '120px';
                 image.style.height = 'auto';
 
-
-                // Ajoutez ensuite cette ligne pour charger l'image par défaut si l'image de l'album n'est pas disponible
+                // Gestionnaire d'événements pour l'erreur de chargement de l'image
                 image.onerror = function () {
-                    image.src = defaultImage; // Utilisation de l'image par défaut pour l'album
+                    // En cas d'erreur, charge l'image par défaut
+                    image.src = srcImg;
                 };
-                
-                image.src = albumImagePath; // Tentative de chargement de l'image d'album
+
+
                 imageLink.appendChild(image);
                 imageCell.appendChild(imageLink);
                 row.appendChild(imageCell);
@@ -372,7 +271,6 @@ function init() {
                 `;
 
                 row.innerHTML += otherCellsHTML;
-
 
 
                 // Ajout de boutons pour ajouter et retirer des éléments du panier
@@ -550,7 +448,7 @@ function init() {
         numberItem.textContent = `Numéro: ${albumDetails.numero}`;
 
         const authorItem = document.createElement('li');
-        authorItem.textContent = `Auteur: ${(albumDetails.idAuteur).nom}`;
+        authorItem.textContent = `Auteur: ${auteurs.get(albumDetails.idAuteur).nom}`;
 
         const priceItem = document.createElement('li');
         priceItem.textContent = `Prix: ${albumDetails.prix}€`;
